@@ -38,7 +38,7 @@
   --text-h3: clamp(1.5rem, 1.3rem + 0.8vw, 2.125rem);
   --text-h2: clamp(2rem, 1.7rem + 1.6vw, 3.25rem);
   --text-h1: clamp(2.5rem, 2.1rem + 2.2vw, 4.25rem);
-  --text-numeral: clamp(3.75rem, 2.5rem + 8.5vw, 9rem);
+  --text-monumental: clamp(2.75rem, 2rem + 4vw, 5.5rem);
 
   /* Layout dimensions */
   --container-max: 1240px;
@@ -290,7 +290,7 @@ h1, h2, h3, h4, .display-font {
   font-weight: 800;
   font-size: 102px;
   letter-spacing: 12px;
-  fill: url(#gold-metallic-grad);
+  fill: url(#gold-metallic-grad-mob);
   text-transform: uppercase;
   filter: drop-shadow(0 4px 20px rgba(242, 163, 58, 0.25));
   animation: wordmark-converge-mobile 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -427,18 +427,69 @@ h1, h2, h3, h4, .display-font {
   z-index: 2;
 }
 
-/* Section 2: Origin (1,00,00,000) */
-.numeral-display {
+/* Section 2: Scale Beyond Finite Numbers */
+.monumental-headline {
   font-family: var(--font-display);
-  font-size: var(--text-numeral);
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  background: linear-gradient(180deg, #FFFFFF 20%, #F2A33A 75%, #9A6B2F 100%);
+  font-size: var(--text-monumental);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, #FFFFFF 15%, #F2A33A 75%, #B47318 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
-  filter: drop-shadow(0 10px 40px rgba(242, 163, 58, 0.2));
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+  filter: drop-shadow(0 10px 40px rgba(242, 163, 58, 0.25));
+}
+
+.dimension-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-top: 2.75rem;
+}
+
+@media (min-width: 640px) {
+  .dimension-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dimension-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.dimension-card:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(242, 163, 58, 0.4);
+  transform: translateY(-2px);
+}
+
+.dimension-tag {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.dimension-title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
+}
+
+.dimension-body {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-graphite-light);
 }
 
 .telugu-entry {

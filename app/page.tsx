@@ -56,46 +56,83 @@ export default function HomePage() {
         <div className="section-transition-glow" aria-hidden="true" />
 
         {/* ====================================================================
-            2. THE MATHEMATICS OF SCALE: The 10^7 Principle (Origin & Heritage)
+            2. THE ARCHITECTURE OF SCALE: Unbounded Magnitude (Origin & Heritage)
             ==================================================================== */}
         <section className="section-3d section-origin" aria-labelledby="origin-title">
           <div className="container">
             <div className="cosmic-panel">
               <div className="waypoint-badge">
                 <span className="waypoint-dot" aria-hidden="true" />
-                <span>Mathematical Foundation · The 10⁷ Magnitude</span>
+                <span>The Unbounded Horizon · Architectural Ethos</span>
               </div>
 
               <div className="grid-12">
                 <div style={{ gridColumn: "span 12" }}>
-                  {/* Oversized golden display numeral */}
-                  <div className="numeral-display" aria-hidden="true">
-                    1,00,00,000
-                  </div>
-
-                  <h2 id="origin-title" className="visually-hidden">
-                    The Mathematics of Scale and Heritage
+                  <h2 id="origin-title" className="monumental-headline">
+                    The Architecture of Unbounded Scale
                   </h2>
 
                   <div className="reading-measure">
+                    <p className="hero-support mb-8">
+                      Crore is not a finite threshold or a single fixed number. It is an order of magnitude: exponential compounding, infinite multiplicity, and the refusal to be bound by linear limits.
+                    </p>
+
                     <p className="telugu-entry">
-                      <span lang="te">కోటి</span> <strong className="text-white">Koti (10⁷ · Ten Million)</strong> — <span className="etymology-definition">The threshold of monumental scale. In physics as in enterprise, when scale reaches the order of millions, dynamics cease to be linear and transform into compounding network gravity.</span>
+                      <span lang="te">కోటి</span> <strong className="text-white">Koti (Magnitude &amp; Scale)</strong> — <span className="etymology-definition">Beyond any singular quantity; the principle of exponential scaling where individual forces compound into gravitational, self-reinforcing power.</span>
                     </p>
                     <p className="telugu-entry">
-                      <span lang="te">చుక్కలు</span> <strong className="text-white">Chukkalu (Points of Light)</strong> — <span className="etymology-definition">Autonomous points of sovereign energy; independent founder-led business units, specialized operational divisions, and unyielding individual excellence.</span>
+                      <span lang="te">చుక్కలు</span> <strong className="text-white">Chukkalu (Points of Light)</strong> — <span className="etymology-definition">The stars; autonomous sovereign enterprises, specialized operational engines, each burning bright on its own axis.</span>
                     </p>
 
                     <div className="origin-body">
                       <p className="mb-4">
-                        My surname is <strong className="text-white">Kotichukkala</strong>. In our ancestral tongue, <em>Koti</em> is ten million; <em>Chukkalu</em> are the stars.
+                        The company bears the founder&apos;s surname, <strong className="text-white">Kotichukkala</strong>. In our ancestral tongue, <em>Koti</em> represents monumental, unconstrained scale; <em>Chukkalu</em> are the stars.
                       </p>
                       <p className="mb-4">
-                        Single ventures, like lone stars, are subject to the entropy of individual market cycles. But when thousands of points of capability are organized under a unified, disciplined capital allocation engine, they form a gravitational constellation capable of outlasting any single economic epoch.
-                      </p>
-                      <p className="philosophical-quote mt-6 pt-6" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
-                        &ldquo;CRORESTARS is the operationalization of that truth: assembling the sovereign brilliance of many independent businesses under one disciplined, generation-scale balance sheet.&rdquo;
+                        A single venture, like a lone star, is vulnerable to the entropy of individual market cycles. But when sovereign points of industrial capability are organized under a disciplined capital allocation holding, they form a self-sustaining constellation capable of outlasting any single economic epoch.
                       </p>
                     </div>
+                  </div>
+
+                  {/* The 4 Dimensions of CRORESTARS (Full-width grid) */}
+                  <div className="dimension-grid">
+                    <div className="dimension-card">
+                      <span className="dimension-tag">DIMENSION 01</span>
+                      <h3 className="dimension-title">The Quantum of Scale</h3>
+                      <p className="dimension-body">
+                        We do not measure ambition by arbitrary ceilings. Scale is a compounding function: building operational velocity, reinvesting free cash flow, and engineering positive feedback loops that turn linear growth into exponential institutional gravity.
+                      </p>
+                    </div>
+
+                    <div className="dimension-card">
+                      <span className="dimension-tag">DIMENSION 02</span>
+                      <h3 className="dimension-title">The Constellation of Enterprise</h3>
+                      <p className="dimension-body">
+                        Like stars generating their own fusion, every future operating business under CRORESTARS will be built as an autonomous, founder-led engine—with sovereign P&amp;L responsibility, distinct market leadership, and fierce speed.
+                      </p>
+                    </div>
+
+                    <div className="dimension-card">
+                      <span className="dimension-tag">DIMENSION 03</span>
+                      <h3 className="dimension-title">The Conglomerate Holding</h3>
+                      <p className="dimension-body">
+                        CRORESTARS acts as the central gravitational core: allocating capital rationally, managing counter-cyclical risk, and incubating frontier initiatives without diluting existing operations or relying on fragile external debt.
+                      </p>
+                    </div>
+
+                    <div className="dimension-card">
+                      <span className="dimension-tag">DIMENSION 04</span>
+                      <h3 className="dimension-title">The Generational Lineage</h3>
+                      <p className="dimension-body">
+                        Rooted in ancestral identity and built with classical Roman discipline, CRORESTARS is engineered to endure across generations—transcending transient market cycles, speculative hype, and technological shifts.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="reading-measure pt-8 mt-8" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                    <p className="philosophical-quote">
+                      &ldquo;A single enterprise is an event. A constellation of compounded industries is an era. We build not for quarters, but for centuries.&rdquo;
+                    </p>
                   </div>
                 </div>
               </div>
