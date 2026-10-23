@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StarBackground from "@/components/StarBackground";
 
 export const metadata: Metadata = {
   title: "About Us | The Meaning Behind the Name",
@@ -13,6 +14,9 @@ export default function AboutPage() {
 
   return (
     <>
+      {/* Subtle Star Travel Background (Light Opacity, non-intrusive) */}
+      <StarBackground />
+
       {/* Site Header */}
       <header className="site-header" role="banner">
         <div className="container site-header-inner">

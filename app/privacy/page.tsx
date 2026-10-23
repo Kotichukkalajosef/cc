@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StarBackground from "@/components/StarBackground";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | CRORESTARS",
@@ -12,6 +13,9 @@ export default function PrivacyPage() {
 
   return (
     <>
+      {/* Subtle Star Travel Background (Light Opacity, non-intrusive) */}
+      <StarBackground />
+
       <header className="site-header" role="banner">
         <div className="container site-header-inner">
           <Link href="/" className="brand-mark" aria-label="CRORESTARS — Home">

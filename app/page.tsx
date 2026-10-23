@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
 import ContactForm from "@/components/ContactForm";
+import StarBackground from "@/components/StarBackground";
 
 export default function HomePage() {
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@crorestars.com";
@@ -8,6 +9,9 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Subtle Star Travel Background (Light Opacity, non-intrusive) */}
+      <StarBackground />
+
       {/* Site Header */}
       <header className="site-header" role="banner">
         <div className="container site-header-inner">
