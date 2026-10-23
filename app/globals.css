@@ -492,134 +492,59 @@ h1, h2, h3, h4, .display-font {
 
 /* ==============================================================================
    Wordmark: Big Bang Collision & Traveling Orange Starlight Border
-   - Desktop: Full-width horizontal wordmark with collision and starlight beam.
-   - Mobile: Monumental stacked block (CRORE / STARS) looking massive and clean.
-   - Letters: Crisp white fill with an orange starlight border traveling letter to letter.
+   1. "CRORE" (left) and "STARS" (right) rush in at high speed.
+   2. They collide with a Big Bang burst.
+   3. They fuse into ONE SINGLE WORD: "CRORESTARS".
+   4. The orange starlight travels STRICTLY on the letter borders (fill is crisp white).
    ============================================================================== */
 .wordmark-container {
   width: 100%;
   max-width: 100%;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
   position: relative;
   user-select: none;
   cursor: pointer;
 }
 
-/* Desktop View (>= 640px) */
-.wordmark-desktop-view {
-  display: block;
-  width: 100%;
+.wordmark-stage {
   position: relative;
-}
-
-.desktop-track {
+  width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+}
+
+/* 1. Intro Collision Track (Two halves rushing inward) */
+.wordmark-collision-track {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8.8vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: clamp(0.04em, 0.8vw, 0.1em);
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 1;
   max-width: 100%;
 }
 
-.desktop-track .word-part {
-  flex: 1;
-  min-width: 0;
+.wordmark-container.is-fused .wordmark-collision-track {
+  display: none !important;
 }
 
-.word-svg-half {
-  width: 100%;
-  height: auto;
-  display: block;
-  overflow: visible;
-}
-
-/* Mobile View (< 640px) — Huge Stacked Block */
-.wordmark-mobile-view {
-  display: none;
-  width: 100%;
-  position: relative;
-}
-
-.wordmark-mobile-stack {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 0.15rem;
-}
-
-.mobile-word-row {
-  width: 100%;
-}
-
-.word-svg-mobile {
-  width: 100%;
-  height: auto;
-  display: block;
-  overflow: visible;
-}
-
-@media (max-width: 639px) {
-  .wordmark-desktop-view {
-    display: none !important;
-  }
-  .wordmark-mobile-view {
-    display: block !important;
-  }
-}
-
-/* SVG Text Styles: Crisp White Fill & Moving Orange Starlight Border */
-.svg-fill-text {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 108px;
-  letter-spacing: 12px;
-  fill: #FFFFFF;
-  text-transform: uppercase;
-}
-
-.svg-stroke-text {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 108px;
-  letter-spacing: 12px;
-  fill: none;
-  stroke-width: 2.8px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 6px rgba(255, 107, 0, 0.75));
-  text-transform: uppercase;
-}
-
-.svg-fill-text-mobile {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 106px;
-  letter-spacing: 10px;
-  fill: #FFFFFF;
-  text-transform: uppercase;
-}
-
-.svg-stroke-text-mobile {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 106px;
-  letter-spacing: 10px;
-  fill: none;
-  stroke-width: 2.8px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 6px rgba(255, 107, 0, 0.75));
-  text-transform: uppercase;
-}
-
-/* Inward Rushing Collision Animation */
-.word-crore,
-.row-crore {
+.word-crore {
+  display: inline-block;
+  transform-origin: right center;
   animation: collide-from-left 0.65s cubic-bezier(0.12, 0.85, 0.28, 1) forwards;
   will-change: transform, opacity;
 }
 
-.word-stars,
-.row-stars {
+.word-stars {
+  display: inline-block;
+  transform-origin: left center;
   animation: collide-from-right 0.65s cubic-bezier(0.12, 0.85, 0.28, 1) forwards;
   will-change: transform, opacity;
 }
@@ -628,13 +553,15 @@ h1, h2, h3, h4, .display-font {
   0% {
     transform: translate3d(-35vw, 0, 0);
     opacity: 0;
+    color: #F2A33A;
   }
-  25% {
-    opacity: 0.85;
+  30% {
+    opacity: 0.9;
   }
   100% {
     transform: translate3d(0, 0, 0);
     opacity: 1;
+    color: #FFFFFF;
   }
 }
 
@@ -642,17 +569,69 @@ h1, h2, h3, h4, .display-font {
   0% {
     transform: translate3d(35vw, 0, 0);
     opacity: 0;
+    color: #F2A33A;
   }
-  25% {
-    opacity: 0.85;
+  30% {
+    opacity: 0.9;
   }
   100% {
     transform: translate3d(0, 0, 0);
     opacity: 1;
+    color: #FFFFFF;
   }
 }
 
-/* Big Bang Shockwave Burst at the seam */
+/* 2. Unified Single Word: "CRORESTARS" */
+.wordmark-unified-wrap {
+  display: none;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark-container.is-fused .wordmark-unified-wrap {
+  display: block !important;
+  animation: unified-fade-in 0.2s ease-out forwards;
+}
+
+@keyframes unified-fade-in {
+  from { opacity: 0.8; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.wordmark-unified-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Interior: Crisp Pure White Fill */
+.fused-word-fill {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 106px;
+  letter-spacing: 12px;
+  fill: #FFFFFF;
+  text-transform: uppercase;
+}
+
+/* Border: Traveling Orange Starlight STRICTLY on the contours */
+.fused-word-border {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 106px;
+  letter-spacing: 12px;
+  fill: none !important; /* STRICTLY NO FILL: BORDER ONLY */
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px rgba(255, 107, 0, 0.8));
+  text-transform: uppercase;
+}
+
+/* Big Bang Shockwave Burst at the seam of impact */
 .big-bang-anchor {
   position: absolute;
   left: 50%;
@@ -668,10 +647,10 @@ h1, h2, h3, h4, .display-font {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 260px;
-  height: 260px;
-  margin-top: -130px;
-  margin-left: -130px;
+  width: 280px;
+  height: 280px;
+  margin-top: -140px;
+  margin-left: -140px;
   border-radius: 50%;
   background: radial-gradient(circle, #FFFFFF 0%, #FFF2D6 25%, #F2A33A 55%, rgba(242, 163, 58, 0) 70%);
   transform: scale(0);
@@ -746,8 +725,6 @@ h1, h2, h3, h4, .display-font {
 @media (prefers-reduced-motion: reduce) {
   .word-crore,
   .word-stars,
-  .row-crore,
-  .row-stars,
   .big-bang-flash,
   .big-bang-shockwave,
   .big-bang-flare {
@@ -757,6 +734,13 @@ h1, h2, h3, h4, .display-font {
   }
   .big-bang-anchor {
     display: none !important;
+  }
+  .wordmark-collision-track {
+    display: none !important;
+  }
+  .wordmark-unified-wrap {
+    display: block !important;
+    opacity: 1 !important;
   }
 }
 
@@ -1227,8 +1211,8 @@ h1, h2, h3, h4, .display-font {
     padding-right: 0.85rem;
   }
 
-  .wordmark-track {
-    font-size: 1.65rem;
+  .wordmark-collision-track {
+    font-size: 1.45rem;
     letter-spacing: 0.02em;
     font-weight: 900;
   }
