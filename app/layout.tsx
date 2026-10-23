@@ -6,14 +6,14 @@ const cinzel = Cinzel({
   subsets: ["latin"],
   variable: "--font-cinzel",
   display: "swap",
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "800"],
 });
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const cormorant = Cormorant_Garamond({
@@ -36,11 +36,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://crorestars.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "CRORESTARS | Many Possibilities. One Vision.",
+    default: "CRORESTARS — Built to Become More.",
     template: "%s | CRORESTARS",
   },
   description:
-    "CRORESTARS is an enduring institutional enterprise in its foundational era, conceived to architect, capitalize, and operate sovereign businesses across generations.",
+    "CRORESTARS is founded on the ambition to build, grow, and create lasting value. We believe what begins with one idea can develop into something far greater through vision, discipline, and purposeful execution.",
   alternates: {
     canonical: "/",
   },
@@ -49,15 +49,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: "CRORESTARS",
-    title: "CRORESTARS | A Crore of Stars. One Direction.",
+    title: "CRORESTARS — Built to Become More.",
     description:
-      "An enduring institutional enterprise in its foundational era, conceived to architect, capitalize, and operate sovereign businesses across generations.",
+      "CRORESTARS is founded on the ambition to build, grow, and create lasting value. Built to Become More.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CRORESTARS",
+    title: "CRORESTARS — Built to Become More.",
     description:
-      "An enduring institutional enterprise in its foundational era, conceived to architect, capitalize, and operate sovereign businesses across generations.",
+      "CRORESTARS is founded on the ambition to build, grow, and create lasting value. Built to Become More.",
   },
   icons: {
     icon: "/icon.svg",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020205",
+  themeColor: "#08090A",
   width: "device-width",
   initialScale: 1,
 };
@@ -84,6 +84,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "CRORESTARS",
     url: siteUrl,
+    slogan: "Built to Become More.",
     founder: {
       "@type": "Person",
       name: "Kotichukkala",

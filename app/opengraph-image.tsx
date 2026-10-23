@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "CRORESTARS";
+export const alt = "CRORESTARS — Built to Become More.";
 export const size = {
   width: 1200,
   height: 630,
@@ -15,22 +15,36 @@ export default async function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#000000",
+          backgroundColor: "#08090A",
+          gap: 20,
         }}
       >
         <span
           style={{
             fontFamily: "sans-serif",
-            fontSize: 108,
-            fontWeight: 900,
-            letterSpacing: "0.08em",
+            fontSize: 96,
+            fontWeight: 800,
+            letterSpacing: "0.12em",
             color: "#FFFFFF",
             textTransform: "uppercase",
           }}
         >
           CRORESTARS
+        </span>
+        <span
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: 28,
+            fontWeight: 600,
+            letterSpacing: "0.18em",
+            color: "#F2A33A",
+            textTransform: "uppercase",
+          }}
+        >
+          Built to Become More.
         </span>
       </div>
     ),
