@@ -8,29 +8,36 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 3D Interactive WebGL Starfield & Constellation Canvas */}
+      {/* 3D Celestial Space Flight Engine (Zig-zag star rendezvous on scroll) */}
       <ThreeBackground />
 
       {/* Site Header */}
       <header className="site-header" role="banner">
         <div className="container site-header-inner">
           <Link href="/" className="brand-mark" aria-label="CRORESTARS — Home">
-            <span className="brand-dot" aria-hidden="true" />
+            <span className="brand-beacon" aria-hidden="true" />
             <span>CRORESTARS</span>
           </Link>
           <nav aria-label="Primary navigation">
             <a href="#contact" className="nav-link">
-              Get in touch
+              Initiate Contact
             </a>
           </nav>
         </div>
       </header>
 
       <main id="main-content">
-        {/* 1. Hero Section (Deep Cosmic Black with Ambient 3D Depth) */}
+        {/* ====================================================================
+            1. HERO: The Sovereign Genesis (Alpha Kotichukkala)
+            ==================================================================== */}
         <section className="section-3d section-hero" aria-labelledby="hero-title">
           <div className="container">
-            {/* The One Memorable Thing: Giant Width-Fitting Wordmark (100% visible, never clipped) */}
+            <div className="waypoint-badge">
+              <span className="waypoint-dot" aria-hidden="true" />
+              <span>Waypoint I · Genesis · Alpha Kotichukkala</span>
+            </div>
+
+            {/* Inscribed Roman Wordmark (Scalable SVG, 100% visible, no clipping) */}
             <Wordmark />
 
             <div className="grid-12">
@@ -39,7 +46,7 @@ export default function HomePage() {
                   A crore of stars. One direction.
                 </h1>
                 <p className="hero-support reading-measure">
-                  CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.
+                  CRORESTARS is a sovereign business house in its foundational era, conceived to architect, develop, and compound enduring enterprises across industries over generations.
                 </p>
               </div>
             </div>
@@ -48,32 +55,47 @@ export default function HomePage() {
 
         <div className="section-transition-glow" aria-hidden="true" />
 
-        {/* 2. Origin Section (Atmospheric Obsidian with 3D Glass Depth Panel) */}
+        {/* ====================================================================
+            2. ORIGIN: The Cosmology of Kotichukkala (1,00,00,000)
+            ==================================================================== */}
         <section className="section-3d section-origin" aria-labelledby="origin-title">
           <div className="container">
-            <div className="origin-card">
+            <div className="cosmic-panel">
+              <div className="waypoint-badge">
+                <span className="waypoint-dot" aria-hidden="true" />
+                <span>Waypoint II · Magnitude · The Crore Beacon</span>
+              </div>
+
               <div className="grid-12">
                 <div style={{ gridColumn: "span 12" }}>
-                  {/* Oversized number visual set in display face */}
+                  {/* Oversized golden display numeral */}
                   <div className="numeral-display" aria-hidden="true">
                     1,00,00,000
                   </div>
 
                   <h2 id="origin-title" className="visually-hidden">
-                    Origin of the name
+                    The Origin and Cosmology of Kotichukkala
                   </h2>
 
                   <div className="reading-measure">
                     <p className="telugu-entry">
-                      <span lang="te">కోటి</span> (koti) — crore, ten million.
+                      <span lang="te">కోటి</span> <strong className="text-white">Koti (Crore)</strong> — <span className="etymology-definition">Ten million; the quantum of monumental magnitude, abundance, and generation-scale compounding.</span>
                     </p>
                     <p className="telugu-entry">
-                      <span lang="te">చుక్కలు</span> (chukkalu) — stars, small points of light.
+                      <span lang="te">చుక్కలు</span> <strong className="text-white">Chukkalu (Stars)</strong> — <span className="etymology-definition">Countless autonomous points of light; independent sparks of intellect, initiative, and sovereign enterprise.</span>
                     </p>
 
-                    <p className="origin-body">
-                      My surname is Kotichukkala. Koti is ten million. Chukkalu are stars. Together: a crore of stars, more lights than anyone can count, each small, each its own. This company carries that name, and the idea inside it.
-                    </p>
+                    <div className="origin-body">
+                      <p className="mb-4">
+                        My surname is <strong className="text-white">Kotichukkala</strong>. In our ancestral tongue, <em>Koti</em> represents the scale of ten million; <em>Chukkalu</em> are the stars.
+                      </p>
+                      <p className="mb-4">
+                        Alone in the void of the night, a single light is fragile and imperceptible. But when ten million sovereign lights align under common gravity, they form an unshakeable constellation that commands the sky.
+                      </p>
+                      <p className="philosophical-quote mt-6 pt-6" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                        &ldquo;CRORESTARS carries that surname and the immutable truth inside it: that the infinite possibilities of human enterprise achieve their supreme strength when unified under one unwavering direction.&rdquo;
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -83,19 +105,56 @@ export default function HomePage() {
 
         <div className="section-transition-glow" aria-hidden="true" />
 
-        {/* 3. Philosophy Section (Deep Space Horizon) */}
+        {/* ====================================================================
+            3. PHILOSOPHY: The Architecture of Convergence
+            ==================================================================== */}
         <section className="section-3d section-philosophy" aria-labelledby="philosophy-title">
           <div className="container">
             <div className="cosmic-panel">
+              <div className="waypoint-badge">
+                <span className="waypoint-dot" aria-hidden="true" />
+                <span>Waypoint III · Convergence · The Core Vision</span>
+              </div>
+
               <div className="grid-12">
                 <div style={{ gridColumn: "span 12" }}>
                   <h2 id="philosophy-title" className="philosophy-statement">
                     Many possibilities. One vision.
                   </h2>
-                  <div className="reading-measure">
-                    <p className="philosophy-body">
-                      One idea is small. So is one person, one team, one company. Brought together under a clear direction, they can become something none of them could be alone. That is how a star forms, and it is how we intend to build.
-                    </p>
+
+                  <p className="philosophical-quote mb-6">
+                    &ldquo;One idea is small. So is one person, one team, one venture. Brought together by gravitational discipline, they become an enterprise that none of them could be alone.&rdquo;
+                  </p>
+
+                  <p className="philosophy-body reading-measure">
+                    This is how a star ignites in deep space—through the immense concentration of diffuse energy into an enduring nuclear furnace. It is precisely how we intend to build.
+                  </p>
+
+                  {/* The Triad of Gravitational Doctrine */}
+                  <div className="doctrine-grid">
+                    <div className="doctrine-card">
+                      <span className="doctrine-number">DOCTRINE I</span>
+                      <h3 className="doctrine-title">Gravitational Longevity</h3>
+                      <p className="doctrine-body">
+                        Quarterly metrics measure transient weather; generational governance measures climate. We build institutional foundations designed to remain standing a century from now, rejecting short-term speculation in favor of compounding reality.
+                      </p>
+                    </div>
+
+                    <div className="doctrine-card">
+                      <span className="doctrine-number">DOCTRINE II</span>
+                      <h3 className="doctrine-title">Autonomous Sovereignty</h3>
+                      <p className="doctrine-body">
+                        Every commercial division under CRORESTARS will cultivate its own unyielding standard of operational mastery—operating with entrepreneurial agility, yet fortified by the collective capital and wisdom of the group.
+                      </p>
+                    </div>
+
+                    <div className="doctrine-card">
+                      <span className="doctrine-number">DOCTRINE III</span>
+                      <h3 className="doctrine-title">Disciplined Convergence</h3>
+                      <p className="doctrine-body">
+                        Breakthrough value is created at the intersection of industries. By orchestrating disparate capabilities—technology, strategic capital, and essential industrial operations—we unlock frontiers that isolated ventures cannot reach.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -105,18 +164,32 @@ export default function HomePage() {
 
         <div className="section-transition-glow" aria-hidden="true" />
 
-        {/* 4. Ambition Section (Horizon Flight) */}
+        {/* ====================================================================
+            4. AMBITION: The Uncompromised Standard of Truth
+            ==================================================================== */}
         <section className="section-3d section-ambition" aria-labelledby="ambition-title">
           <div className="container">
             <div className="cosmic-panel">
+              <div className="waypoint-badge">
+                <span className="waypoint-dot" aria-hidden="true" />
+                <span>Waypoint IV · Horizon · Frontier Ventures</span>
+              </div>
+
               <div className="grid-12">
                 <div style={{ gridColumn: "span 12" }}>
-                  <h2 id="ambition-title" className="visually-hidden">
-                    Our ambition
+                  <h2 id="ambition-title" className="ambition-headline">
+                    Built for What Comes Next
                   </h2>
+
                   <div className="reading-measure">
-                    <p className="ambition-body">
-                      Over time, we intend to build meaningful businesses across industries, wherever there is a genuine opportunity to create value. We have not chosen the first one yet, and we will not pretend otherwise.
+                    <p className="ambition-body mb-5">
+                      Over time, our mandate is to identify and operate businesses across sectors wherever structural shifts create the opportunity for profound, lasting value creation.
+                    </p>
+                    <p className="ambition-body mb-5">
+                      We have not selected our inaugural operating business yet, and we refuse to simulate early accomplishments. True institutional greatness requires uncompromised honesty at its foundation.
+                    </p>
+                    <p className="philosophical-quote mt-6 pt-6" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                      &ldquo;We do not fabricate certifications, artificial client lists, or inflated pedigrees. Our greatest asset today is absolute clarity of purpose: laying the bedrock for enterprises that will endure.&rdquo;
                     </p>
                   </div>
                 </div>
@@ -127,24 +200,32 @@ export default function HomePage() {
 
         <div className="section-transition-glow" aria-hidden="true" />
 
-        {/* 5. Journey & 6. Contact Sections */}
+        {/* ====================================================================
+            5. JOURNEY & 6. CONTACT: The Constellation Gate
+            ==================================================================== */}
         <section className="section-3d section-journey-contact" aria-labelledby="journey-title">
           <div className="container">
-            {/* Journey */}
+            {/* The Genesis Transparency */}
             <div className="grid-12">
               <div style={{ gridColumn: "span 12" }}>
+                <div className="waypoint-badge">
+                  <span className="waypoint-dot" aria-hidden="true" />
+                  <span>Waypoint V · Terminal · The Constellation Gate</span>
+                </div>
+
                 <h2 id="journey-title" className="visually-hidden">
-                  The journey
+                  The Genesis Journey
                 </h2>
+
                 <div className="reading-measure">
                   <p className="journey-body">
-                    This is the beginning. There are no subsidiaries, clients or track record to show yet. What exists is a name, a direction, and a commitment to build carefully. We will add to this page only what is true.
+                    This is the origin. There are no subsidiaries, outside clients, or historical balance sheets to display today. What exists is a revered name, an unswerving direction, and an iron commitment to build with discipline. We will chronicle on this platform only what is verified, achieved, and true.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Interactive 3D Contact Terminal */}
             <div className="grid-12">
               <div style={{ gridColumn: "span 12" }}>
                 <ContactForm fallbackEmail={contactEmail} />
@@ -154,16 +235,19 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* 7. Footer */}
+      {/* ====================================================================
+          7. FOOTER
+          ==================================================================== */}
       <footer className="site-footer" role="contentinfo">
         <div className="container footer-inner">
-          <div>
-            &copy; 2026 CRORESTARS
+          <div className="flex items-center gap-3">
+            <span className="brand-beacon" aria-hidden="true" />
+            <span>&copy; 2026 CRORESTARS. All rights reserved.</span>
           </div>
           <div className="footer-meta">
             <span>[REGISTERED BUSINESS NAME, CITY, COUNTRY]</span>
             <Link href="/privacy" className="footer-link">
-              Privacy
+              Privacy Doctrine
             </Link>
           </div>
         </div>

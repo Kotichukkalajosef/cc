@@ -97,9 +97,9 @@ export default function ContactForm({
 
   return (
     <div className="contact-wrap" id="contact">
-      <h2 className="contact-heading">Get in touch</h2>
+      <h2 className="contact-heading">Initiate Communication</h2>
       <p className="contact-copy">
-        For partnerships, opportunities, or to introduce yourself.
+        For strategic partnerships, institutional dialogue, or to introduce yourself.
       </p>
 
       {status === "success" ? (
@@ -109,7 +109,7 @@ export default function ContactForm({
           className="form-status form-status-success reading-measure"
         >
           <p>
-            Thank you. Your message has been sent. We review every communication carefully.
+            Your transmission has been received. We review every communication with sovereign discretion.
           </p>
         </div>
       ) : (
@@ -212,7 +212,7 @@ export default function ContactForm({
               disabled={status === "submitting"}
               className="btn-submit"
             >
-              {status === "submitting" ? "Sending..." : "Send message"}
+              {status === "submitting" ? "Transmitting..." : "Transmit Message"}
             </button>
           </div>
         </form>
@@ -220,7 +220,7 @@ export default function ContactForm({
 
       {/* Fallback direct email */}
       <div className="mailto-fallback">
-        You can also write directly to{" "}
+        For direct institutional correspondence, write to{" "}
         <a href={`mailto:${fallbackEmail}`}>
           {fallbackEmail}
         </a>

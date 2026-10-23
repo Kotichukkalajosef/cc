@@ -1,18 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Newsreader, Noto_Sans_Telugu } from "next/font/google";
+import { Cinzel, Plus_Jakarta_Sans, Cormorant_Garamond, Noto_Sans_Telugu } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({
+const cinzel = Cinzel({
   subsets: ["latin"],
-  variable: "--font-archivo",
+  variable: "--font-cinzel",
   display: "swap",
-  axes: ["wdth"],
+  weight: ["400", "600", "700", "800", "900"],
 });
 
-const newsreader = Newsreader({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-newsreader",
+  variable: "--font-jakarta",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["400", "600", "700"],
   style: ["normal", "italic"],
 });
 
@@ -28,11 +36,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://crorestars.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "CRORESTARS",
+    default: "CRORESTARS | Many Possibilities. One Vision.",
     template: "%s | CRORESTARS",
   },
   description:
-    "CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.",
+    "CRORESTARS is an enduring institutional enterprise in its foundational era, conceived to architect, capitalize, and operate sovereign businesses across generations.",
   alternates: {
     canonical: "/",
   },
@@ -41,15 +49,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: "CRORESTARS",
-    title: "CRORESTARS",
+    title: "CRORESTARS | A Crore of Stars. One Direction.",
     description:
-      "CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.",
+      "An enduring institutional enterprise in its foundational era, conceived to architect, capitalize, and operate sovereign businesses across generations.",
   },
   twitter: {
     card: "summary_large_image",
     title: "CRORESTARS",
     description:
-      "CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.",
+      "An enduring institutional enterprise in its foundational era, conceived to architect, capitalize, and operate sovereign businesses across generations.",
   },
   icons: {
     icon: "/icon.svg",
@@ -61,7 +69,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#020205",
   width: "device-width",
   initialScale: 1,
 };
@@ -71,7 +79,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Truthful JSON-LD Organization containing only name, url, and founder name
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -79,14 +86,14 @@ export default function RootLayout({
     url: siteUrl,
     founder: {
       "@type": "Person",
-      name: "[FOUNDER NAME]", // TODO: Replace with founder name
+      name: "Kotichukkala",
     },
   };
 
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${newsreader.variable} ${notoSansTelugu.variable}`}
+      className={`${cinzel.variable} ${plusJakarta.variable} ${cormorant.variable} ${notoSansTelugu.variable}`}
     >
       <head>
         <script
