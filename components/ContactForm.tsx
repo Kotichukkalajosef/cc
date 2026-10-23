@@ -97,9 +97,9 @@ export default function ContactForm({
 
   return (
     <div className="contact-wrap" id="contact">
-      <h2 className="contact-heading">Initiate Communication</h2>
+      <h2 className="contact-heading">Direct Executive Terminal</h2>
       <p className="contact-copy">
-        For strategic partnerships, institutional dialogue, or to introduce yourself.
+        For strategic alliances, institutional capital partners, and exceptional operators seeking to build generational assets.
       </p>
 
       {status === "success" ? (
@@ -109,7 +109,7 @@ export default function ContactForm({
           className="form-status form-status-success reading-measure"
         >
           <p>
-            Your transmission has been received. We review every communication with sovereign discretion.
+            Your inquiry has been encrypted and delivered directly to the founder&apos;s executive desk. We evaluate high-conviction opportunities with rigorous discretion.
           </p>
         </div>
       ) : (
@@ -212,7 +212,7 @@ export default function ContactForm({
               disabled={status === "submitting"}
               className="btn-submit"
             >
-              {status === "submitting" ? "Transmitting..." : "Transmit Message"}
+              {status === "submitting" ? "Transmitting..." : "Transmit Executive Inquiry"}
             </button>
           </div>
         </form>
