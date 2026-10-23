@@ -2,6 +2,7 @@ import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
 import ContactForm from "@/components/ContactForm";
 import StarBackground from "@/components/StarBackground";
+import Navbar from "@/components/Navbar";
 
 export default function HomePage() {
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@crorestars.com";
@@ -12,29 +13,8 @@ export default function HomePage() {
       {/* Subtle Star Travel Background (Light Opacity, non-intrusive) */}
       <StarBackground />
 
-      {/* Site Header */}
-      <header className="site-header" role="banner">
-        <div className="container site-header-inner">
-          <Link href="/" className="brand-mark" aria-label="CRORESTARS — Home">
-            <span className="brand-dot" aria-hidden="true" />
-            <span>CRORESTARS</span>
-          </Link>
-          <nav className="site-nav" aria-label="Primary navigation">
-            <Link href="/" className="nav-link">
-              Home
-            </Link>
-            <Link href="/about" className="nav-link">
-              About
-            </Link>
-            <Link href="/about#vision" className="nav-link">
-              Our Vision
-            </Link>
-            <a href="#contact" className="nav-btn">
-              Contact
-            </a>
-          </nav>
-        </div>
-      </header>
+      {/* Redesigned Responsive Navbar */}
+      <Navbar />
 
       <main id="main-content">
         {/* ====================================================================

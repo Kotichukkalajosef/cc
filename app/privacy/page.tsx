@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import StarBackground from "@/components/StarBackground";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | CRORESTARS",
@@ -16,28 +17,8 @@ export default function PrivacyPage() {
       {/* Subtle Star Travel Background (Light Opacity, non-intrusive) */}
       <StarBackground />
 
-      <header className="site-header" role="banner">
-        <div className="container site-header-inner">
-          <Link href="/" className="brand-mark" aria-label="CRORESTARS — Home">
-            <span className="brand-dot" aria-hidden="true" />
-            <span>CRORESTARS</span>
-          </Link>
-          <nav className="site-nav" aria-label="Primary navigation">
-            <Link href="/" className="nav-link">
-              Home
-            </Link>
-            <Link href="/about" className="nav-link">
-              About
-            </Link>
-            <Link href="/about#vision" className="nav-link">
-              Our Vision
-            </Link>
-            <Link href="/#contact" className="nav-btn">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+      {/* Redesigned Responsive Navbar */}
+      <Navbar />
 
       <main id="main-content" className="section" style={{ paddingTop: "clamp(4rem, 8vw, 7rem)", minHeight: "75vh" }}>
         <div className="container">
