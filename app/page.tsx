@@ -31,9 +31,9 @@ export default function HomePage() {
                 <span>An Ambition in the Making</span>
               </div>
 
-              <h1 id="hero-title" className="hero-title">
+              <h2 id="hero-title" className="hero-title">
                 Built to Become More.
-              </h1>
+              </h2>
 
               <p className="section-lead">
                 CRORESTARS is founded on the ambition to build, grow, and create lasting value. We believe what begins with one idea can develop into something far greater through vision, discipline, and purposeful execution.

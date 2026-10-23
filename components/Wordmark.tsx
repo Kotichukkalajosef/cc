@@ -64,10 +64,10 @@ export default function Wordmark({ className = "" }: WordmarkProps) {
         </div>
 
         {/* The Two Halves: CRORE & STARS colliding into CRORESTARS */}
-        <div className="wordmark-track">
+        <h1 className="wordmark-track">
           <span className="word-part word-crore">CRORE</span>
           <span className="word-part word-stars">STARS</span>
-        </div>
+        </h1>
       </div>
     </div>
   );
