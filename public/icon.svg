@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="4" fill="#171614"/>
+  <!-- Bold A shape -->
+  <path d="M16 6L9 24H12.5L14.2 19.5H17.8L19.5 24H23L16 6ZM15.1 16.5L16 13.8L16.9 16.5H15.1Z" fill="#FFFFFF"/>
+  <!-- Amber star / spark inside the triangle of the A -->
+  <circle cx="16" cy="11.5" r="1.5" fill="#E5932B"/>
+</svg>
