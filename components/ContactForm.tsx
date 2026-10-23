@@ -16,9 +16,10 @@ export default function ContactForm({
     website_url: "", // Hidden honeypot field
   });
 
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "unconfigured" | "error">("idle");
   const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({});
-  const [generalError, setGeneralError] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
+  const [directMailtoUrl, setDirectMailtoUrl] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -59,7 +60,7 @@ export default function ContactForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setGeneralError("");
+    setStatusMessage("");
 
     const errors = validate();
     if (Object.keys(errors).length > 0) {
@@ -68,6 +69,14 @@ export default function ContactForm({
     }
 
     setStatus("submitting");
+
+    // Prepare direct mailto URL as immediate fallback
+    const mailto = `mailto:${fallbackEmail}?subject=${encodeURIComponent(
+      `[CRORESTARS Inquiry] Message from ${formData.name.trim()}`
+    )}&body=${encodeURIComponent(
+      `From: ${formData.name.trim()} (${formData.email.trim()})\n\nMessage:\n${formData.message.trim()}`
+    )}`;
+    setDirectMailtoUrl(mailto);
 
     try {
       const res = await fetch("/api/contact", {
@@ -78,43 +87,121 @@ export default function ContactForm({
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.error || "Unable to deliver your message at this time.");
+      if (res.ok && data.success) {
+        setStatus("success");
+        setStatusMessage(data.message || "Your inquiry has been delivered directly to contact@crorestars.com.");
+        setFormData({ name: "", email: "", message: "", website_url: "" });
+        setFieldErrors({});
+      } else if (data.unconfigured) {
+        // Server SMTP awaiting password
+        setStatus("unconfigured");
+        setStatusMessage(
+          "Your message is ready! Server background sending requires your Hostinger mailbox password in .env.local. Click below to transmit this message directly to contact@crorestars.com right now via your email client:"
+        );
+        if (data.mailtoUrl) {
+          setDirectMailtoUrl(data.mailtoUrl);
+        }
+      } else {
+        throw new Error(data.error || "Unable to send via server.");
       }
-
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "", website_url: "" });
-      setFieldErrors({});
     } catch (err: unknown) {
       setStatus("error");
       if (err instanceof Error) {
-        setGeneralError(err.message);
+        setStatusMessage(err.message);
       } else {
-        setGeneralError("An unexpected error occurred. Please use the direct email link below.");
+        setStatusMessage("Transmission through server encountered an error. Please use direct email dispatch.");
       }
     }
   };
 
+  const getDynamicMailto = () => {
+    if (directMailtoUrl) return directMailtoUrl;
+    const namePart = formData.name.trim() ? ` from ${formData.name.trim()}` : "";
+    const subject = encodeURIComponent(`[CRORESTARS Inquiry]${namePart}`);
+    const body = encodeURIComponent(
+      `From: ${formData.name.trim() || "[Your Name]"} (${formData.email.trim() || "[Your Email]"})\n\n${
+        formData.message.trim() || "[Your Message]"
+      }`
+    );
+    return `mailto:${fallbackEmail}?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div className="contact-wrap" id="contact">
+      <div className="waypoint-badge">
+        <span className="waypoint-dot" aria-hidden="true" />
+        <span>Direct Communication Terminal · contact@crorestars.com</span>
+      </div>
+
       <h2 className="contact-heading">Direct Executive Terminal</h2>
       <p className="contact-copy">
-        For strategic alliances, institutional capital partners, and exceptional operators seeking to build generational assets.
+        For strategic alliances, institutional capital partners, sovereign co-investments, and exceptional operators seeking to build generational assets.
       </p>
 
-      {status === "success" ? (
+      {status === "success" && (
         <div
           role="status"
           aria-live="polite"
-          className="form-status form-status-success reading-measure"
+          className="form-status form-status-success reading-measure mb-6"
         >
-          <p>
-            Your inquiry has been encrypted and delivered directly to the founder&apos;s executive desk. We evaluate high-conviction opportunities with rigorous discretion.
-          </p>
+          <strong style={{ display: "block", color: "var(--color-gold)", marginBottom: "0.5rem" }}>
+            TRANSMISSION VERIFIED
+          </strong>
+          <p>{statusMessage}</p>
         </div>
-      ) : (
+      )}
+
+      {status === "unconfigured" && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="form-status reading-measure mb-6"
+          style={{
+            backgroundColor: "rgba(242, 163, 58, 0.08)",
+            border: "1px solid var(--color-gold)",
+            color: "var(--color-white)",
+            padding: "1.5rem",
+          }}
+        >
+          <strong style={{ display: "block", color: "var(--color-gold)", marginBottom: "0.5rem" }}>
+            READY FOR DIRECT DISPATCH TO contact@crorestars.com
+          </strong>
+          <p className="mb-4">{statusMessage}</p>
+          <a
+            href={getDynamicMailto()}
+            className="btn-submit"
+            style={{
+              display: "inline-block",
+              textAlign: "center",
+              textDecoration: "none",
+              marginTop: "0.5rem",
+            }}
+          >
+            Launch Mail App (Send to contact@crorestars.com) &rarr;
+          </a>
+        </div>
+      )}
+
+      {status === "error" && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="form-status form-status-error mb-6"
+        >
+          <p className="mb-3">{statusMessage}</p>
+          <a
+            href={getDynamicMailto()}
+            className="btn-secondary"
+            style={{ display: "inline-block" }}
+          >
+            Send Directly via Your Email App &rarr;
+          </a>
+        </div>
+      )}
+
+      {status !== "success" && (
         <form onSubmit={handleSubmit} className="contact-form" noValidate>
-          {/* Honeypot field (hidden from real users, caught if bots fill it) */}
+          {/* Honeypot field (hidden from real users) */}
           <div className="visually-hidden" aria-hidden="true">
             <label htmlFor="website_url">Do not fill this field</label>
             <input
@@ -128,16 +215,6 @@ export default function ContactForm({
             />
           </div>
 
-          {generalError && (
-            <div
-              role="alert"
-              aria-live="assertive"
-              className="form-status form-status-error"
-            >
-              {generalError}
-            </div>
-          )}
-
           <div className="form-group">
             <label htmlFor="name" className="form-label">
               Name
@@ -149,6 +226,7 @@ export default function ContactForm({
               required
               autoComplete="name"
               className="form-input"
+              placeholder="Your full name or institution"
               value={formData.name}
               onChange={handleChange}
               aria-invalid={!!fieldErrors.name}
@@ -163,7 +241,7 @@ export default function ContactForm({
 
           <div className="form-group">
             <label htmlFor="email" className="form-label">
-              Email
+              Email Address
             </label>
             <input
               type="email"
@@ -172,6 +250,7 @@ export default function ContactForm({
               required
               autoComplete="email"
               className="form-input"
+              placeholder="founder@institution.com"
               value={formData.email}
               onChange={handleChange}
               aria-invalid={!!fieldErrors.email}
@@ -186,7 +265,7 @@ export default function ContactForm({
 
           <div className="form-group">
             <label htmlFor="message" className="form-label">
-              Message
+              Executive Message
             </label>
             <textarea
               id="message"
@@ -194,6 +273,7 @@ export default function ContactForm({
               required
               rows={5}
               className="form-textarea"
+              placeholder="Outline the opportunity, strategic alignment, or institutional thesis..."
               value={formData.message}
               onChange={handleChange}
               aria-invalid={!!fieldErrors.message}
@@ -206,7 +286,7 @@ export default function ContactForm({
             )}
           </div>
 
-          <div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center" }}>
             <button
               type="submit"
               disabled={status === "submitting"}
@@ -214,14 +294,22 @@ export default function ContactForm({
             >
               {status === "submitting" ? "Transmitting..." : "Transmit Executive Inquiry"}
             </button>
+
+            <a
+              href={getDynamicMailto()}
+              className="btn-secondary"
+              title="Open your device's native email client"
+            >
+              Send via Email App (Direct)
+            </a>
           </div>
         </form>
       )}
 
-      {/* Fallback direct email */}
-      <div className="mailto-fallback">
-        For direct institutional correspondence, write to{" "}
-        <a href={`mailto:${fallbackEmail}`}>
+      {/* Fallback direct email badge */}
+      <div className="mailto-fallback" style={{ marginTop: "2.5rem" }}>
+        <span>Direct corporate correspondence address: </span>
+        <a href={`mailto:${fallbackEmail}`} style={{ color: "var(--color-gold)", fontWeight: 700 }}>
           {fallbackEmail}
         </a>
       </div>

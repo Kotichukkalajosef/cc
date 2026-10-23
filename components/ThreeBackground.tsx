@@ -10,127 +10,227 @@ export default function ThreeBackground() {
     const container = containerRef.current;
     if (!container) return;
 
+    // Detect reduced motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // --- 1. Scene & Camera Setup ---
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020205, 0.0007);
 
     const camera = new THREE.PerspectiveCamera(
-      60,
+      55,
       window.innerWidth / window.innerHeight,
       0.1,
-      4000
+      6000
     );
 
     let renderer: THREE.WebGLRenderer | null = null;
     try {
       renderer = new THREE.WebGLRenderer({
         antialias: true,
-        alpha: true,
+        alpha: false, // Solid rendering with clearColor guarantees deep space background is always visible
         powerPreference: "high-performance",
       });
+      renderer.setClearColor(0x020207, 1);
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.domElement.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;display:block;";
       container.appendChild(renderer.domElement);
     } catch (e) {
-      console.warn("WebGL not available", e);
+      console.warn("WebGL initialization failed", e);
       return;
     }
 
-    // --- 2. Circular Star Glow Texture Helper ---
-    const createGlowTexture = (innerColor = "#FFFFFF", midColor = "#F2A33A") => {
+    // --- 2. Ultra-Luminous Star & Flare Texture Generators ---
+    const createStarTexture = (color = "#FFFFFF", glowColor = "#F2A33A", withSpikes = false) => {
       const canvas = document.createElement("canvas");
       canvas.width = 128;
       canvas.height = 128;
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-        gradient.addColorStop(0, innerColor);
-        gradient.addColorStop(0.15, midColor);
-        gradient.addColorStop(0.4, "rgba(242, 163, 58, 0.25)");
-        gradient.addColorStop(0.7, "rgba(242, 163, 58, 0.05)");
+        // Soft outer radial glow
+        const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 60);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(0.2, glowColor);
+        gradient.addColorStop(0.5, "rgba(242, 163, 58, 0.35)");
+        gradient.addColorStop(0.8, "rgba(242, 163, 58, 0.08)");
+        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(64, 64, 60, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Optional sharp celestial diffraction spikes
+        if (withSpikes) {
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.75)";
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(64, 8);
+          ctx.lineTo(64, 120);
+          ctx.moveTo(8, 64);
+          ctx.lineTo(120, 64);
+          ctx.stroke();
+        }
+      }
+      return new THREE.CanvasTexture(canvas);
+    };
+
+    const createNebulaTexture = (colorStop1: string, colorStop2: string) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 256;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 120);
+        gradient.addColorStop(0, colorStop1);
+        gradient.addColorStop(0.4, colorStop2);
+        gradient.addColorStop(0.8, "rgba(10, 5, 25, 0.04)");
         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(64, 64, 64, 0, Math.PI * 2);
+        ctx.arc(128, 128, 120, 0, Math.PI * 2);
         ctx.fill();
       }
       return new THREE.CanvasTexture(canvas);
     };
 
-    const goldStarTexture = createGlowTexture("#FFFFFF", "#F2A33A");
-    const diamondStarTexture = createGlowTexture("#FFFFFF", "#E2E8F0");
-    const cyanStarTexture = createGlowTexture("#FFFFFF", "#7DD3FC");
+    const goldStarTexture = createStarTexture("#FFFFFF", "#F2A33A", true);
+    const diamondStarTexture = createStarTexture("#FFFFFF", "#93C5FD", false);
+    const amberNebulaTexture = createNebulaTexture("rgba(242, 163, 58, 0.14)", "rgba(180, 83, 9, 0.05)");
+    const purpleNebulaTexture = createNebulaTexture("rgba(139, 92, 246, 0.12)", "rgba(49, 46, 129, 0.04)");
+    const cyanNebulaTexture = createNebulaTexture("rgba(56, 189, 248, 0.10)", "rgba(14, 116, 144, 0.03)");
 
-    // --- 3. Zig-Zag Waypoint Stars ("Meeting the Stars" in Space) ---
-    // The camera flies along a distinct 3D zig-zag trajectory, swooping to meet each star directly!
+    // --- 3. Omnidirectional Deep Space Skybox (6,000+ Stars) ---
+    // Guaranteed to be visible at all times, no matter where the camera points
+    const omniCount = 4500;
+    const omniGeometry = new THREE.BufferGeometry();
+    const omniPositions = new Float32Array(omniCount * 3);
+    const omniColors = new Float32Array(omniCount * 3);
+
+    for (let i = 0; i < omniCount; i++) {
+      const i3 = i * 3;
+      // Distribute in a vast 360-degree sphere
+      const radius = 600 + Math.random() * 2400;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      omniPositions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+      omniPositions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      omniPositions[i3 + 2] = -radius * Math.cos(phi) - 1000;
+
+      const rand = Math.random();
+      const col =
+        rand > 0.65
+          ? new THREE.Color(0xf2a33a) // Celestial Gold
+          : rand > 0.35
+          ? new THREE.Color(0xffffff) // Diamond White
+          : new THREE.Color(0x93c5fd); // Stellar Blue
+
+      omniColors[i3] = col.r;
+      omniColors[i3 + 1] = col.g;
+      omniColors[i3 + 2] = col.b;
+    }
+
+    omniGeometry.setAttribute("position", new THREE.BufferAttribute(omniPositions, 3));
+    omniGeometry.setAttribute("color", new THREE.BufferAttribute(omniColors, 3));
+
+    const omniMaterial = new THREE.PointsMaterial({
+      size: 5.5,
+      map: diamondStarTexture,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.95,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const omniStarField = new THREE.Points(omniGeometry, omniMaterial);
+    scene.add(omniStarField);
+
+    // --- 4. Volumetric Deep Space Nebulae ---
+    const nebulaCount = 45;
+    const nebulaSprites: THREE.Sprite[] = [];
+    const nebulaTextures = [amberNebulaTexture, purpleNebulaTexture, cyanNebulaTexture];
+
+    for (let i = 0; i < nebulaCount; i++) {
+      const mat = new THREE.SpriteMaterial({
+        map: nebulaTextures[i % 3],
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      const sprite = new THREE.Sprite(mat);
+      const dist = 400 + Math.random() * 2200;
+      const angle = Math.random() * Math.PI * 2;
+      const zOffset = -Math.random() * 2500;
+
+      sprite.position.set(
+        Math.cos(angle) * dist,
+        Math.sin(angle) * dist,
+        zOffset
+      );
+      const scale = 500 + Math.random() * 600;
+      sprite.scale.set(scale, scale, 1);
+      scene.add(sprite);
+      nebulaSprites.push(sprite);
+    }
+
+    // --- 5. 3D Zig-Zag Flight Path & The 5 Sovereign Star Waypoints ---
     const waypoints = [
       {
-        name: "Genesis · Alpha Kotichukkala",
-        pos: new THREE.Vector3(55, 20, 40),
-        size: 38,
+        pos: new THREE.Vector3(70, 25, -20),
+        size: 85,
         color: 0xf2a33a,
-        label: "Waypoint I",
       },
       {
-        name: "Magnitude · The Crore Beacon",
-        pos: new THREE.Vector3(-65, -15, -550),
-        size: 46,
+        pos: new THREE.Vector3(-90, -30, -650),
+        size: 95,
         color: 0xffffff,
-        label: "Waypoint II",
       },
       {
-        name: "Convergence · The Core Vision",
-        pos: new THREE.Vector3(60, 30, -1150),
-        size: 42,
+        pos: new THREE.Vector3(85, 40, -1350),
+        size: 90,
         color: 0xf2a33a,
-        label: "Waypoint III",
       },
       {
-        name: "Horizon · Frontier Ventures",
-        pos: new THREE.Vector3(-55, -25, -1750),
-        size: 36,
-        color: 0x7dd3fc,
-        label: "Waypoint IV",
+        pos: new THREE.Vector3(-80, -35, -2050),
+        size: 85,
+        color: 0x93c5fd,
       },
       {
-        name: "Terminal · The Constellation Gate",
-        pos: new THREE.Vector3(0, 0, -2350),
-        size: 52,
+        pos: new THREE.Vector3(0, 0, -2800),
+        size: 120,
         color: 0xf2a33a,
-        label: "Waypoint V",
       },
     ];
 
-    // Create 3D Flight Curve (Catmull-Rom Spline for graceful zig-zag flight)
-    // Points lead the camera slightly in front of each star so you encounter each beacon intimately
+    // Spline curve guiding the camera right past the stars in an aerospace zig-zag
     const flightPoints = [
-      new THREE.Vector3(15, 5, 120), // Start point behind Hero
-      new THREE.Vector3(45, 15, 50), // Swoop to Star 1
-      new THREE.Vector3(0, 5, -250), // Transition curve
-      new THREE.Vector3(-50, -12, -540), // Swoop to Star 2 (Origin)
-      new THREE.Vector3(10, 10, -850), // Transition curve
-      new THREE.Vector3(48, 24, -1140), // Swoop to Star 3 (Philosophy)
-      new THREE.Vector3(-10, -5, -1450), // Transition curve
-      new THREE.Vector3(-42, -20, -1740), // Swoop to Star 4 (Ambition)
-      new THREE.Vector3(-15, -8, -2050), // Transition curve
-      new THREE.Vector3(0, 0, -2320), // Final approach to Star 5 (Contact)
+      new THREE.Vector3(0, 10, 160),     // Camera start in Hero
+      new THREE.Vector3(45, 20, 40),     // Approach Star I
+      new THREE.Vector3(-15, 0, -320),   // Transition
+      new THREE.Vector3(-65, -22, -620), // Approach Star II
+      new THREE.Vector3(20, 15, -980),   // Transition
+      new THREE.Vector3(60, 30, -1320),  // Approach Star III
+      new THREE.Vector3(-20, -10, -1700),// Transition
+      new THREE.Vector3(-55, -25, -2020),// Approach Star IV
+      new THREE.Vector3(-10, -5, -2420), // Transition
+      new THREE.Vector3(0, 0, -2760),    // Approach Star V (Contact Terminal)
     ];
     const flightPath = new THREE.CatmullRomCurve3(flightPoints, false, "catmullrom", 0.35);
 
-    // Render Waypoint Star Meshes (Multi-layered brilliant beacons)
+    // Render Waypoint Stars: Glowing Solars with Multi-Ring Accents
     const waypointSprites: THREE.Sprite[] = [];
     const orbitalRings: THREE.Mesh[] = [];
 
     waypoints.forEach((wp) => {
-      // 1. Brilliant core star sprite
-      const texture = wp.color === 0x7dd3fc ? cyanStarTexture : wp.color === 0xffffff ? diamondStarTexture : goldStarTexture;
+      // Radiant Core Star
       const mat = new THREE.SpriteMaterial({
-        map: texture,
+        map: goldStarTexture,
         color: wp.color,
         transparent: true,
-        opacity: 0.95,
+        opacity: 1,
         blending: THREE.AdditiveBlending,
       });
       const sprite = new THREE.Sprite(mat);
@@ -139,90 +239,47 @@ export default function ThreeBackground() {
       scene.add(sprite);
       waypointSprites.push(sprite);
 
-      // 2. Rotating orbital gravitational rings around each star
-      const ringGeo = new THREE.RingGeometry(wp.size * 0.42, wp.size * 0.45, 64);
-      const ringMat = new THREE.MeshBasicMaterial({
+      // Celestial Ring 1
+      const ringGeo1 = new THREE.RingGeometry(wp.size * 0.42, wp.size * 0.45, 64);
+      const ringMat1 = new THREE.MeshBasicMaterial({
         color: wp.color,
         transparent: true,
-        opacity: 0.3,
+        opacity: 0.4,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending,
       });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.position.copy(wp.pos);
-      ring.rotation.x = Math.PI * 0.38;
-      ring.rotation.y = Math.PI * 0.15;
-      scene.add(ring);
-      orbitalRings.push(ring);
+      const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
+      ring1.position.copy(wp.pos);
+      ring1.rotation.x = Math.PI * 0.35;
+      ring1.rotation.y = Math.PI * 0.15;
+      scene.add(ring1);
+      orbitalRings.push(ring1);
 
-      // 3. Second counter-rotating coordinate ring
-      const outerRingGeo = new THREE.RingGeometry(wp.size * 0.65, wp.size * 0.67, 48);
-      const outerRingMat = new THREE.MeshBasicMaterial({
+      // Celestial Ring 2
+      const ringGeo2 = new THREE.RingGeometry(wp.size * 0.65, wp.size * 0.68, 48);
+      const ringMat2 = new THREE.MeshBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.18,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending,
       });
-      const outerRing = new THREE.Mesh(outerRingGeo, outerRingMat);
-      outerRing.position.copy(wp.pos);
-      outerRing.rotation.x = -Math.PI * 0.25;
-      scene.add(outerRing);
-      orbitalRings.push(outerRing);
+      const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+      ring2.position.copy(wp.pos);
+      ring2.rotation.x = -Math.PI * 0.28;
+      scene.add(ring2);
+      orbitalRings.push(ring2);
     });
 
-    // --- 4. Deep Space Star Corridor (4,000 Twinkling Stars) ---
-    const starCount = 3800;
-    const starGeometry = new THREE.BufferGeometry();
-    const starPositions = new Float32Array(starCount * 3);
-    const starColors = new Float32Array(starCount * 3);
-    const starTwinkleSpeeds = new Float32Array(starCount);
-
-    for (let i = 0; i < starCount; i++) {
-      const i3 = i * 3;
-      // Scatter stars around the winding flight path
-      const t = Math.random();
-      const pathPoint = flightPath.getPoint(t);
-      const radius = 20 + Math.random() * 260;
-      const angle = Math.random() * Math.PI * 2;
-
-      starPositions[i3] = pathPoint.x + Math.cos(angle) * radius;
-      starPositions[i3 + 1] = pathPoint.y + Math.sin(angle) * radius;
-      starPositions[i3 + 2] = pathPoint.z + (Math.random() - 0.5) * 200;
-
-      const rand = Math.random();
-      const col = rand > 0.75 ? new THREE.Color(0xf2a33a) : rand > 0.4 ? new THREE.Color(0xffffff) : new THREE.Color(0xa5c9ff);
-      starColors[i3] = col.r;
-      starColors[i3 + 1] = col.g;
-      starColors[i3 + 2] = col.b;
-
-      starTwinkleSpeeds[i] = Math.random() * 3 + 1;
-    }
-
-    starGeometry.setAttribute("position", new THREE.BufferAttribute(starPositions, 3));
-    starGeometry.setAttribute("color", new THREE.BufferAttribute(starColors, 3));
-
-    const starMaterial = new THREE.PointsMaterial({
-      size: 3.6,
-      map: goldStarTexture,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.95,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-
-    const starField = new THREE.Points(starGeometry, starMaterial);
-    scene.add(starField);
-
-    // --- 5. Dynamic Light-Year Warp Speed Streaks ---
-    const streakCount = 450;
+    // --- 6. Dynamic Light-Year Warp Streaks ---
+    const streakCount = 550;
     const streakPositions = new Float32Array(streakCount * 6);
+
     for (let i = 0; i < streakCount; i++) {
       const idx = i * 6;
       const t = Math.random();
       const pt = flightPath.getPoint(t);
-      const rad = 25 + Math.random() * 190;
+      const rad = 30 + Math.random() * 240;
       const ang = Math.random() * Math.PI * 2;
 
       const px = pt.x + Math.cos(ang) * rad;
@@ -236,6 +293,7 @@ export default function ThreeBackground() {
       streakPositions[idx + 4] = py;
       streakPositions[idx + 5] = pz;
     }
+
     const streakGeometry = new THREE.BufferGeometry();
     streakGeometry.setAttribute("position", new THREE.BufferAttribute(streakPositions, 3));
     const streakMaterial = new THREE.LineBasicMaterial({
@@ -243,24 +301,24 @@ export default function ThreeBackground() {
       transparent: true,
       opacity: 0,
       blending: THREE.AdditiveBlending,
+      linewidth: 1.5,
     });
     const streakLines = new THREE.LineSegments(streakGeometry, streakMaterial);
     scene.add(streakLines);
 
-    // --- 6. Interstellar Constellation Zig-Zag Vector Track ---
-    // Visual line connecting the stars in a dramatic zig-zag path
-    const trackPoints = flightPath.getPoints(200);
+    // Glowing Constellation Vector Track
+    const trackPoints = flightPath.getPoints(250);
     const trackGeo = new THREE.BufferGeometry().setFromPoints(trackPoints);
     const trackMat = new THREE.LineBasicMaterial({
       color: 0xf2a33a,
       transparent: true,
-      opacity: 0.16,
+      opacity: 0.22,
       blending: THREE.AdditiveBlending,
     });
     const trackLine = new THREE.Line(trackGeo, trackMat);
     scene.add(trackLine);
 
-    // --- 7. Interactive Mouse Parallax & Flight Curve Tracking ---
+    // --- 7. Interactive Parallax & Scroll Listeners ---
     let mouseX = 0;
     let mouseY = 0;
     let targetMouseX = 0;
@@ -268,13 +326,13 @@ export default function ThreeBackground() {
 
     let scrollProgress = 0;
     let targetScrollProgress = 0;
-    let lastScrollY = window.scrollY;
+    let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
     let scrollVelocity = 0;
     let smoothVelocity = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
-      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 30;
-      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 25;
+      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 35;
+      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 28;
     };
 
     const handleScroll = () => {
@@ -282,7 +340,7 @@ export default function ThreeBackground() {
       targetScrollProgress = Math.min(Math.max(window.scrollY / maxScroll, 0), 0.999);
 
       const delta = Math.abs(window.scrollY - lastScrollY);
-      scrollVelocity = Math.min(delta, 140);
+      scrollVelocity = Math.min(delta, 160);
       lastScrollY = window.scrollY;
     };
 
@@ -298,13 +356,16 @@ export default function ThreeBackground() {
     };
     window.addEventListener("resize", handleResize);
 
-    // --- 8. Animation & Warp Speed Flight Loop ---
+    // Initial position
+    handleScroll();
+
+    // --- 8. Render & Animation Loop ---
     let animationFrameId: number;
     let time = 0;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      time += 0.014;
+      time += 0.012;
 
       // Smooth interpolation for mouse and scroll flight
       mouseX += (targetMouseX - mouseX) * 0.05;
@@ -315,20 +376,19 @@ export default function ThreeBackground() {
       scrollVelocity *= 0.92;
 
       if (!prefersReducedMotion) {
-        // Evaluate position along the zig-zag Catmull-Rom spline curve!
+        // Evaluate position along the zig-zag Catmull-Rom spline curve
         const currentPathPoint = flightPath.getPoint(scrollProgress);
-        // Look-ahead point on the curve (so camera points into the curve turning toward the next star)
         const lookAheadT = Math.min(scrollProgress + 0.04, 1);
         const lookAheadPoint = flightPath.getPoint(lookAheadT);
 
-        // Position camera directly along the zig-zag curve with cursor parallax offset
+        // Position camera with mouse parallax
         camera.position.x = currentPathPoint.x + mouseX;
         camera.position.y = currentPathPoint.y - mouseY;
         camera.position.z = currentPathPoint.z;
 
-        // Dynamic banking roll as camera curves left and right!
+        // Dynamic banking roll on turns
         const tangent = flightPath.getTangent(scrollProgress);
-        const rollAngle = -tangent.x * 0.45;
+        const rollAngle = -tangent.x * 0.42;
         camera.rotation.z = THREE.MathUtils.lerp(camera.rotation.z, rollAngle, 0.05);
 
         camera.lookAt(
@@ -337,15 +397,16 @@ export default function ThreeBackground() {
           lookAheadPoint.z
         );
 
-        // Rotate celestial star field gently
-        starField.rotation.z = time * 0.015;
+        // Slow celestial rotation of the skybox
+        omniStarField.rotation.y = time * 0.015;
+        omniStarField.rotation.z = time * 0.008;
 
-        // Animate orbital rings around the stars
+        // Rotate orbital rings
         orbitalRings.forEach((ring, idx) => {
-          ring.rotation.z += 0.008 * (idx % 2 === 0 ? 1 : -1);
+          ring.rotation.z += 0.01 * (idx % 2 === 0 ? 1 : -1);
         });
 
-        // Pulsing breathing effect on Waypoint Stars as you approach
+        // Pulsing breathing effect on Waypoint Stars
         waypointSprites.forEach((sprite, idx) => {
           const pulse = 1 + Math.sin(time * 2.5 + idx * 1.5) * 0.15;
           const baseSize = waypoints[idx].size;
@@ -353,16 +414,15 @@ export default function ThreeBackground() {
         });
 
         // Warp speed streaks effect during scroll
-        const warpIntensity = Math.min(smoothVelocity / 35, 1);
-        streakMaterial.opacity = THREE.MathUtils.lerp(streakMaterial.opacity, warpIntensity * 0.85, 0.1);
+        const warpIntensity = Math.min(smoothVelocity / 30, 1);
+        streakMaterial.opacity = THREE.MathUtils.lerp(streakMaterial.opacity, warpIntensity * 0.9, 0.12);
 
         const streakPosAttr = streakGeometry.attributes.position as THREE.BufferAttribute;
         const streakArr = streakPosAttr.array as Float32Array;
-        const stretchDist = 50 + smoothVelocity * 3.5;
+        const stretchDist = 60 + smoothVelocity * 4;
 
         for (let i = 0; i < streakCount; i++) {
           const idx = i * 6;
-          // Stretch tail back along flight tangent
           streakArr[idx + 5] = streakArr[idx + 2] + stretchDist;
         }
         streakPosAttr.needsUpdate = true;
@@ -384,15 +444,17 @@ export default function ThreeBackground() {
         container.removeChild(renderer.domElement);
         renderer.dispose();
       }
-      starGeometry.dispose();
-      starMaterial.dispose();
+      omniGeometry.dispose();
+      omniMaterial.dispose();
       streakGeometry.dispose();
       streakMaterial.dispose();
       trackGeo.dispose();
       trackMat.dispose();
       goldStarTexture.dispose();
       diamondStarTexture.dispose();
-      cyanStarTexture.dispose();
+      amberNebulaTexture.dispose();
+      purpleNebulaTexture.dispose();
+      cyanNebulaTexture.dispose();
     };
   }, []);
 
@@ -409,8 +471,7 @@ export default function ThreeBackground() {
         height: "100vh",
         zIndex: 0,
         pointerEvents: "none",
-        opacity: 1,
-        background: "transparent",
+        overflow: "hidden",
       }}
     />
   );

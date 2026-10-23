@@ -8,7 +8,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 3D Celestial Space Flight Engine (Zig-zag star rendezvous on scroll) */}
+      {/* 3D Deep Space Flight Engine (Omnidirectional starfield, nebulae & zig-zag star rendezvous) */}
       <ThreeBackground />
 
       {/* Site Header */}
@@ -20,7 +20,7 @@ export default function HomePage() {
           </Link>
           <nav aria-label="Primary navigation">
             <a href="#contact" className="nav-link">
-              Direct Inquiries
+              Executive Terminal
             </a>
           </nav>
         </div>
@@ -28,13 +28,13 @@ export default function HomePage() {
 
       <main id="main-content">
         {/* ====================================================================
-            1. HERO: The First-Principles Thesis
+            1. HERO: The Sovereign Conglomerate Thesis
             ==================================================================== */}
         <section className="section-3d section-hero" aria-labelledby="hero-title">
           <div className="container">
             <div className="waypoint-badge">
               <span className="waypoint-dot" aria-hidden="true" />
-              <span>Genesis Horizon · First Principles Architecture</span>
+              <span>Genesis Horizon · Sovereign Master Architecture</span>
             </div>
 
             {/* Inscribed Roman Wordmark (Scalable SVG, 100% visible, zero clipping) */}
@@ -43,10 +43,10 @@ export default function HomePage() {
             <div className="grid-12">
               <div style={{ gridColumn: "span 12" }}>
                 <h1 id="hero-title" className="hero-headline">
-                  A crore of stars. One direction.
+                  A crore of stars. One sovereign direction.
                 </h1>
                 <p className="hero-support reading-measure">
-                  CRORESTARS is being engineered from first principles as an enduring, multi-generational industrial group. We are laying the structural, intellectual, and capital foundations to build and scale sovereign businesses across essential industries over time.
+                  CRORESTARS is being engineered from first principles as an enduring, multi-generational industrial group. We do not chase transient software cycles or speculative trends; we are laying the capital, architectural, and intellectual foundations to build and scale sovereign enterprises across the defining industries of the next century.
                 </p>
               </div>
             </div>
@@ -56,75 +56,68 @@ export default function HomePage() {
         <div className="section-transition-glow" aria-hidden="true" />
 
         {/* ====================================================================
-            2. THE ARCHITECTURE OF SCALE: Unbounded Magnitude (Origin & Heritage)
+            2. THE MASTER THESIS: The Architecture of Exponential Conglomerates
             ==================================================================== */}
         <section className="section-3d section-origin" aria-labelledby="origin-title">
           <div className="container">
             <div className="cosmic-panel">
               <div className="waypoint-badge">
                 <span className="waypoint-dot" aria-hidden="true" />
-                <span>The Unbounded Horizon · Architectural Ethos</span>
+                <span>The Master Thesis · Architecture of Exponential Scale</span>
               </div>
 
               <div className="grid-12">
                 <div style={{ gridColumn: "span 12" }}>
                   <h2 id="origin-title" className="monumental-headline">
-                    The Architecture of Unbounded Scale
+                    The Architecture of Sovereign Scale
                   </h2>
 
                   <div className="reading-measure">
                     <p className="hero-support mb-8">
-                      Crore is not a finite threshold or a single fixed number. It is an order of magnitude: exponential compounding, infinite multiplicity, and the refusal to be bound by linear limits.
-                    </p>
-
-                    <p className="telugu-entry">
-                      <span lang="te">కోటి</span> <strong className="text-white">Koti (Magnitude &amp; Scale)</strong> — <span className="etymology-definition">Beyond any singular quantity; the principle of exponential scaling where individual forces compound into gravitational, self-reinforcing power.</span>
-                    </p>
-                    <p className="telugu-entry">
-                      <span lang="te">చుక్కలు</span> <strong className="text-white">Chukkalu (Points of Light)</strong> — <span className="etymology-definition">The stars; autonomous sovereign enterprises, specialized operational engines, each burning bright on its own axis.</span>
+                      Lone ventures burn out like meteors. The defining institutions of human civilization are engineered as self-sustaining constellations.
                     </p>
 
                     <div className="origin-body">
-                      <p className="mb-4">
-                        The company bears the founder&apos;s surname, <strong className="text-white">Kotichukkala</strong>. In our ancestral tongue, <em>Koti</em> represents monumental, unconstrained scale; <em>Chukkalu</em> are the stars.
+                      <p className="mb-5">
+                        CRORESTARS is founded on an uncompromising thesis: the greatest industrial value is never created by fragile, single-product startups at the mercy of platform gatekeepers or market cycles. It is forged by sovereign conglomerates that master capital allocation, command irreplaceable moats, and compound value across multiple technological epochs.
                       </p>
-                      <p className="mb-4">
-                        A single venture, like a lone star, is vulnerable to the entropy of individual market cycles. But when sovereign points of industrial capability are organized under a disciplined capital allocation holding, they form a self-sustaining constellation capable of outlasting any single economic epoch.
+                      <p className="mb-5">
+                        In astrophysics, a star is a self-sustaining thermonuclear furnace—generating its own energy, commanding its own gravitational field, and illuminating entire systems. We build with the relentless mathematics of constellations: thousands of autonomous points of industrial power, bound together under one disciplined, generation-scale balance sheet.
                       </p>
                     </div>
                   </div>
 
-                  {/* The 4 Dimensions of CRORESTARS (Full-width grid) */}
+                  {/* The 4 Strategic Pillars of CRORESTARS */}
                   <div className="dimension-grid">
                     <div className="dimension-card">
-                      <span className="dimension-tag">DIMENSION 01</span>
-                      <h3 className="dimension-title">The Quantum of Scale</h3>
+                      <span className="dimension-tag">PILLAR 01</span>
+                      <h3 className="dimension-title">Exponential Scale Invariance</h3>
                       <p className="dimension-body">
-                        We do not measure ambition by arbitrary ceilings. Scale is a compounding function: building operational velocity, reinvesting free cash flow, and engineering positive feedback loops that turn linear growth into exponential institutional gravity.
+                        We reject arbitrary ceilings. Scale is a compounding physical law: converting operational cash flows into compounding institutional gravity, ensuring every successive enterprise benefits from the cumulative momentum of the group.
                       </p>
                     </div>
 
                     <div className="dimension-card">
-                      <span className="dimension-tag">DIMENSION 02</span>
-                      <h3 className="dimension-title">The Constellation of Enterprise</h3>
+                      <span className="dimension-tag">PILLAR 02</span>
+                      <h3 className="dimension-title">Sovereign Operating Stars</h3>
                       <p className="dimension-body">
-                        Like stars generating their own fusion, every future operating business under CRORESTARS will be built as an autonomous, founder-led engine—with sovereign P&amp;L responsibility, distinct market leadership, and fierce speed.
+                        A star generates its own fusion. Every operating company under CRORESTARS is engineered with sovereign leadership, absolute operational agility, and market dominance—immune to central bureaucratic inertia.
                       </p>
                     </div>
 
                     <div className="dimension-card">
-                      <span className="dimension-tag">DIMENSION 03</span>
-                      <h3 className="dimension-title">The Conglomerate Holding</h3>
+                      <span className="dimension-tag">PILLAR 03</span>
+                      <h3 className="dimension-title">The Capital Allocation Fortress</h3>
                       <p className="dimension-body">
-                        CRORESTARS acts as the central gravitational core: allocating capital rationally, managing counter-cyclical risk, and incubating frontier initiatives without diluting existing operations or relying on fragile external debt.
+                        Internal capital velocity is the ultimate competitive moat. While others rely on dilutive debt and capricious capital markets, CRORESTARS aggregates retained earnings to underwrite counter-cyclical expansions and long-term dominance.
                       </p>
                     </div>
 
                     <div className="dimension-card">
-                      <span className="dimension-tag">DIMENSION 04</span>
-                      <h3 className="dimension-title">The Generational Lineage</h3>
+                      <span className="dimension-tag">PILLAR 04</span>
+                      <h3 className="dimension-title">The Century-Scale Horizon</h3>
                       <p className="dimension-body">
-                        Rooted in ancestral identity and built with classical Roman discipline, CRORESTARS is engineered to endure across generations—transcending transient market cycles, speculative hype, and technological shifts.
+                        We do not build for quarterly headlines or short-term exits. We build enduring industrial assets designed to outlast technological revolutions, structural macroeconomic shifts, and generational transitions.
                       </p>
                     </div>
                   </div>
@@ -150,21 +143,21 @@ export default function HomePage() {
             <div className="cosmic-panel">
               <div className="waypoint-badge">
                 <span className="waypoint-dot" aria-hidden="true" />
-                <span>The Master Doctrine · Architecture of Value</span>
+                <span>The Master Doctrine · Laws of Industrial Physics</span>
               </div>
 
               <div className="grid-12">
                 <div style={{ gridColumn: "span 12" }}>
                   <h2 id="philosophy-title" className="philosophy-statement">
-                    Many possibilities. One vision.
+                    Many possibilities. One sovereign vision.
                   </h2>
 
                   <p className="philosophical-quote mb-6">
-                    &ldquo;The history of civilization proves that the most resilient enterprises are not single-product monopolies, but synergistic constellations built to weather technological revolutions.&rdquo;
+                    &ldquo;The history of world industry proves that the most resilient institutions are not fragile monopolies, but synergistic constellations built to weather technological revolutions.&rdquo;
                   </p>
 
                   <p className="philosophy-body reading-measure">
-                    Like the world&apos;s most formidable industrial houses—from Berkshire Hathaway to Reliance, from Alphabet to Tata—CRORESTARS is architected around three foundational laws of capital and operational physics:
+                    Modeled on the world&apos;s most formidable industrial houses—from Berkshire Hathaway to Reliance, from Alphabet to Tata—CRORESTARS is architected around three non-negotiable laws:
                   </p>
 
                   {/* The 3 Conglomerate Doctrines */}
@@ -173,23 +166,23 @@ export default function HomePage() {
                       <span className="doctrine-number">PRINCIPLE 01</span>
                       <h3 className="doctrine-title">Infrastructure-Grade Moats</h3>
                       <p className="doctrine-body">
-                        We reject ephemeral software trends and transient consumer fads. Every venture entering the CRORESTARS portfolio must solve structural bottlenecks, possess enduring pricing power, and command a wide, defensible operational moat.
+                        We reject ephemeral consumer trends and transient software hype. Every enterprise entering the CRORESTARS constellation must solve fundamental bottlenecks, command pricing power, and possess an unassailable operational moat.
                       </p>
                     </div>
 
                     <div className="doctrine-card">
                       <span className="doctrine-number">PRINCIPLE 02</span>
-                      <h3 className="doctrine-title">Compounding Capital Engine</h3>
+                      <h3 className="doctrine-title">Compounding Capital Velocity</h3>
                       <p className="doctrine-body">
-                        Internal capital allocation is the ultimate competitive advantage. Cash flows generated by mature foundational operations will be strategically redeployed into frontier technological vectors, compounding capital velocity without dilutive dependency.
+                        Internal capital allocation is the supreme competitive edge. Retained free cash flows from foundational operations will be strategically redeployed into frontier sectors, compounding value without external dilution.
                       </p>
                     </div>
 
                     <div className="doctrine-card">
                       <span className="doctrine-number">PRINCIPLE 03</span>
-                      <h3 className="doctrine-title">Sovereign Autonomy</h3>
+                      <h3 className="doctrine-title">Decentralized Execution</h3>
                       <p className="doctrine-body">
-                        Centralized holding bureaucracies kill innovation. Every operating subsidiary under CRORESTARS will be built with autonomous leadership, sovereign P&amp;L responsibility, and extreme operational agility, while drawing on the group&apos;s collective scale.
+                        Central holding bureaucracies extinguish speed. Every operating company under CRORESTARS will be built with autonomous executive leadership, sovereign P&amp;L responsibility, and aggressive field velocity.
                       </p>
                     </div>
                   </div>
@@ -202,14 +195,14 @@ export default function HomePage() {
         <div className="section-transition-glow" aria-hidden="true" />
 
         {/* ====================================================================
-            4. THE MASTER PLAN: Four Phases to Inter-Generational Scale
+            4. THE MASTER PLAN: Four Phased Horizons
             ==================================================================== */}
         <section className="section-3d section-ambition" aria-labelledby="ambition-title">
           <div className="container">
             <div className="cosmic-panel">
               <div className="waypoint-badge">
                 <span className="waypoint-dot" aria-hidden="true" />
-                <span>The Master Plan · Horizon Roadmap</span>
+                <span>The Master Plan · Phased Horizon Framework</span>
               </div>
 
               <div className="grid-12">
@@ -220,7 +213,7 @@ export default function HomePage() {
 
                   <div className="reading-measure mb-8">
                     <p className="ambition-body">
-                      We think in decades, not quarters. Great corporate empires are not improvised overnight; they are deployed in calculated, irreversible stages:
+                      We operate on decades, not quarters. Great corporate empires are not improvised; they are executed through deliberate, calculated, and irreversible phases:
                     </p>
                   </div>
 
@@ -229,23 +222,23 @@ export default function HomePage() {
                       <span className="doctrine-number" style={{ color: "#FFFFFF" }}>PHASE I · ACTIVE</span>
                       <h3 className="doctrine-title" style={{ color: "var(--color-gold)" }}>The Sovereign Bedrock</h3>
                       <p className="doctrine-body">
-                        Pristine institutional architecture. Zero debt. Rigorous macroeconomic and technological sector mapping. Establishing the sovereign holding brand and capital governance standards.
+                        Pristine institutional architecture. Zero debt. Rigorous macroeconomic and industrial sector mapping. Establishing the sovereign holding brand and capital governance standards.
                       </p>
                     </div>
 
                     <div className="doctrine-card">
                       <span className="doctrine-number">PHASE II · UPCOMING</span>
-                      <h3 className="doctrine-title">The Anchor Enterprise</h3>
+                      <h3 className="doctrine-title">The Anchor Titan</h3>
                       <p className="doctrine-body">
-                        Identifying, capitalizing, and launching the foundational operating company. Building an engine of real cash flow, undeniable customer utility, and defensible market dominance.
+                        Identifying, capitalizing, and launching the foundational operating company. Building an engine of real free cash flow, undeniable customer utility, and defensive market dominance.
                       </p>
                     </div>
 
                     <div className="doctrine-card">
                       <span className="doctrine-number">PHASE III · HORIZON</span>
-                      <h3 className="doctrine-title">Synergistic Scale</h3>
+                      <h3 className="doctrine-title">Synergistic Expansion</h3>
                       <p className="doctrine-body">
-                        Deploying capital into adjacent and frontier industries—digital infrastructure, energy transition, advanced manufacturing, and specialized services—unlocking compounding group synergies.
+                        Deploying internal capital into adjacent and frontier industries—autonomous infrastructure, energy transition, advanced manufacturing, and specialized computing—unlocking exponential synergies.
                       </p>
                     </div>
                   </div>

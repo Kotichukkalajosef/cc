@@ -58,7 +58,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  background-color: var(--color-black);
+  background-color: #020207;
   color: var(--color-white);
   overflow-x: hidden;
 }
@@ -68,7 +68,7 @@ body {
   font-size: var(--text-base);
   line-height: 1.75;
   color: var(--color-light);
-  background-color: var(--color-black);
+  background-color: transparent !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -726,6 +726,33 @@ h1, h2, h3, h4, .display-font {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 50px;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 /* Fallback mailto */
