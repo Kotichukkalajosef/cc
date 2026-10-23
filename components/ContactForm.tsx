@@ -7,7 +7,7 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({
-  fallbackEmail = "hello@crorestars.com",
+  fallbackEmail = "contact@crorestars.com",
 }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: "",

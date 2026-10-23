@@ -28,7 +28,7 @@ Before public launch, replace the following placeholders:
 | :--- | :--- | :--- |
 | `[FOUNDER NAME]` | `app/layout.tsx` | Used in the JSON-LD `Organization` schema `founder.name`. |
 | `[REGISTERED BUSINESS NAME, CITY, COUNTRY]` | `app/page.tsx`, `app/privacy/page.tsx` | Footer legal identity string (e.g. `CRORESTARS Pvt. Ltd., Hyderabad, India`). |
-| `hello@crorestars.com` | `app/page.tsx`, `components/ContactForm.tsx`, `.env.example` | The visible public email address. |
+| `contact@crorestars.com` | `app/page.tsx`, `components/ContactForm.tsx`, `.env.example` | The visible public email address. |
 | `SMTP_USER`, `SMTP_PASS`, `CONTACT_TO` | `.env.local` / Vercel Environment Variables | Hostinger SMTP credentials for the contact form. |
 
 ---
@@ -89,7 +89,7 @@ In your Vercel Project Dashboard:
 1. Navigate to **Settings** &rarr; **Environment Variables**.
 2. Add the following keys:
    - `NEXT_PUBLIC_SITE_URL`: `https://crorestars.com`
-   - `NEXT_PUBLIC_CONTACT_EMAIL`: `hello@crorestars.com`
+   - `NEXT_PUBLIC_CONTACT_EMAIL`: `contact@crorestars.com`
    - `SMTP_USER`: `your-mailbox@crorestars.com`
    - `SMTP_PASS`: `your-hostinger-password`
    - `CONTACT_TO`: `founder@crorestars.com`

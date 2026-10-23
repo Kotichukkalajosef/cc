@@ -1,17 +1,22 @@
 import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
 import ContactForm from "@/components/ContactForm";
+import ThreeBackground from "@/components/ThreeBackground";
 
 export default function HomePage() {
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@crorestars.com";
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@crorestars.com";
 
   return (
     <>
+      {/* 3D Interactive WebGL Starfield & Constellation Canvas */}
+      <ThreeBackground />
+
       {/* Site Header */}
       <header className="site-header" role="banner">
         <div className="container site-header-inner">
           <Link href="/" className="brand-mark" aria-label="CRORESTARS — Home">
-            CRORESTARS
+            <span className="brand-dot" aria-hidden="true" />
+            <span>CRORESTARS</span>
           </Link>
           <nav aria-label="Primary navigation">
             <a href="#contact" className="nav-link">
@@ -22,10 +27,10 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        {/* 1. Hero Section (Black) */}
-        <section className="section section-black" aria-labelledby="hero-title">
+        {/* 1. Hero Section (Deep Cosmic Black with Ambient 3D Depth) */}
+        <section className="section-3d section-hero" aria-labelledby="hero-title">
           <div className="container">
-            {/* The One Memorable Thing: Giant Width-Filling Wordmark */}
+            {/* The One Memorable Thing: Giant Width-Fitting Wordmark (100% visible, never clipped) */}
             <Wordmark />
 
             <div className="grid-12">
@@ -41,39 +46,45 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 2. Origin Section (White) */}
-        <section className="section section-white" aria-labelledby="origin-title">
+        <div className="section-transition-glow" aria-hidden="true" />
+
+        {/* 2. Origin Section (Atmospheric Obsidian with 3D Glass Depth Panel) */}
+        <section className="section-3d section-origin" aria-labelledby="origin-title">
           <div className="container">
-            <div className="grid-12">
-              <div style={{ gridColumn: "span 12" }}>
-                {/* Oversized number visual set in display face */}
-                <div className="numeral-display" aria-hidden="true">
-                  1,00,00,000
-                </div>
+            <div className="origin-card">
+              <div className="grid-12">
+                <div style={{ gridColumn: "span 12" }}>
+                  {/* Oversized number visual set in display face */}
+                  <div className="numeral-display" aria-hidden="true">
+                    1,00,00,000
+                  </div>
 
-                <h2 id="origin-title" className="visually-hidden">
-                  Origin of the name
-                </h2>
+                  <h2 id="origin-title" className="visually-hidden">
+                    Origin of the name
+                  </h2>
 
-                <div className="reading-measure">
-                  <p className="telugu-entry">
-                    <span lang="te">కోటి</span> (koti) — crore, ten million.
-                  </p>
-                  <p className="telugu-entry">
-                    <span lang="te">చుక్కలు</span> (chukkalu) — stars, small points of light.
-                  </p>
+                  <div className="reading-measure">
+                    <p className="telugu-entry">
+                      <span lang="te">కోటి</span> (koti) — crore, ten million.
+                    </p>
+                    <p className="telugu-entry">
+                      <span lang="te">చుక్కలు</span> (chukkalu) — stars, small points of light.
+                    </p>
 
-                  <p className="origin-body">
-                    My surname is Kotichukkala. Koti is ten million. Chukkalu are stars. Together: a crore of stars, more lights than anyone can count, each small, each its own. This company carries that name, and the idea inside it.
-                  </p>
+                    <p className="origin-body">
+                      My surname is Kotichukkala. Koti is ten million. Chukkalu are stars. Together: a crore of stars, more lights than anyone can count, each small, each its own. This company carries that name, and the idea inside it.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 3. Philosophy Section (Charcoal #1A1A1A) */}
-        <section className="section section-charcoal" aria-labelledby="philosophy-title">
+        <div className="section-transition-glow" aria-hidden="true" />
+
+        {/* 3. Philosophy Section (Deep Charcoal with Ambient Amber Light) */}
+        <section className="section-3d section-philosophy" aria-labelledby="philosophy-title">
           <div className="container">
             <div className="grid-12">
               <div style={{ gridColumn: "span 12" }}>
@@ -90,8 +101,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4. Ambition Section (White) */}
-        <section className="section section-white" aria-labelledby="ambition-title">
+        <div className="section-transition-glow" aria-hidden="true" />
+
+        {/* 4. Ambition Section (Glass-Bordered Horizon) */}
+        <section className="section-3d section-ambition" aria-labelledby="ambition-title">
           <div className="container">
             <div className="grid-12">
               <div style={{ gridColumn: "span 12" }}>
@@ -108,8 +121,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 5. Journey & 6. Contact Sections (Black) */}
-        <section className="section section-black" aria-labelledby="journey-title">
+        <div className="section-transition-glow" aria-hidden="true" />
+
+        {/* 5. Journey & 6. Contact Sections */}
+        <section className="section-3d section-journey-contact" aria-labelledby="journey-title">
           <div className="container">
             {/* Journey */}
             <div className="grid-12">
