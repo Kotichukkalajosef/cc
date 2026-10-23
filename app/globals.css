@@ -1,66 +1,496 @@
-@import "tailwindcss";
+/* ==========================================================================
+   CRORESTARS — Official Stylesheet
+   Plain CSS with CSS Custom Properties. Zero UI frameworks.
+   ========================================================================== */
 
-/* =========================================================
-   CRORESTARS – Global CSS
-   Using Tailwind CSS v4 @theme directive
-   ========================================================= */
+:root {
+  /* Core Palette */
+  --color-black: #000000;
+  --color-charcoal: #1A1A1A;
+  --color-white: #FFFFFF;
 
-@theme inline {
-  /* Brand colours */
-  --color-charcoal:    #171614;
-  --color-amber:       #E5932B;
-  --color-warm-white:  #F3F1EC;
-  --color-white:       #FFFFFF;
+  /* Secondary text: #4A4A4A on white gives 9.3:1 contrast (passes AAA) */
+  --color-graphite: #4A4A4A;
+  /* Secondary text on dark backgrounds: #A3A3A3 gives 7.5:1 contrast (passes AAA) */
+  --color-graphite-light: #A3A3A3;
 
-  /* Semantic aliases */
-  --color-background:  var(--color-white);
-  --color-foreground:  var(--color-charcoal);
+  /* Borders & hairline rules */
+  --border-light: rgba(0, 0, 0, 0.12);
+  --border-dark: rgba(255, 255, 255, 0.12);
+
+  /* Provisional accent: Strictly used for keyboard focus rings ONLY */
+  --accent: #F2A33A;
 
   /* Typography */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-archivo), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-reading: var(--font-newsreader), Georgia, Cambria, "Times New Roman", serif;
+  --font-telugu: var(--font-noto-telugu), sans-serif;
+
+  /* Fluid Type Scale */
+  --text-xs: clamp(0.8125rem, 0.77rem + 0.2vw, 0.875rem);
+  --text-sm: clamp(0.9375rem, 0.88rem + 0.25vw, 1rem);
+  --text-base: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --text-lead: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-h3: clamp(1.5rem, 1.3rem + 0.9vw, 2.125rem);
+  --text-h2: clamp(2rem, 1.6rem + 1.8vw, 3.25rem);
+  --text-h1: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  --text-numeral: clamp(3.25rem, 2.5rem + 6.5vw, 8rem);
+
+  /* Layout dimensions */
+  --container-max: 1240px;
+  --section-pad-y: clamp(4.5rem, 7vw, 9rem);
+  --section-pad-x: clamp(1.25rem, 4vw, 3rem);
 }
 
-/* Reset & base */
+/* Base reset */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  overflow-x: hidden;
 }
 
 body {
-  background-color: var(--color-white);
-  color: var(--color-charcoal);
-  font-family: var(--font-sans);
-  font-feature-settings: "kern" 1, "liga" 1;
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-white);
+  background-color: var(--color-black);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
-/* Focus ring */
+/* Keyboard accessibility focus ring — The ONLY place --accent is used */
 :focus-visible {
-  outline: 2px solid #E5932B;
-  outline-offset: 3px;
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 3px !important;
 }
 
-/* Selection */
-::selection {
-  background: #E5932B;
-  color: #FFFFFF;
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1.5rem;
+  z-index: 1000;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: top 0.15s ease-out;
 }
 
-/* Smooth transitions on interactive elements */
-a,
-button {
-  transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+.skip-link:focus {
+  top: 1rem;
 }
 
-/* Utility: visually-hidden for a11y */
-.sr-only {
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--section-pad-x);
+  padding-right: var(--section-pad-x);
+}
+
+/* 12-Column Grid Utility */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(1rem, 2.5vw, 2.5rem);
+  row-gap: 2rem;
+}
+
+/* Section Theming */
+.section {
+  padding-top: var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
+  position: relative;
+}
+
+.section-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.section-white {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.section-charcoal {
+  background-color: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+/* Reading Typography Constraints */
+.reading-measure {
+  max-width: 62ch;
+}
+
+/* Headlines & Display Face */
+h1, h2, h3, h4, .display-font {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-align: left;
+  text-transform: none; /* Sentence case everywhere */
+}
+
+/* Telugu language typography wrapper */
+[lang="te"] {
+  font-family: var(--font-telugu), sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   Header Navigation
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-black);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.brand-mark {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+  color: var(--color-graphite-light);
+  text-decoration: none;
+  padding: 0.5rem;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   The One Memorable Thing: CRORESTARS Wordmark
+   ========================================================================== */
+.wordmark-wrap {
+  width: 100%;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  overflow: hidden;
+}
+
+/* Desktop layout: Full width single line */
+.wordmark-desktop {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: clamp(3.2rem, 9.8vw, 11.5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--color-white);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  /* Load animation: starts wide and tightens to final position */
+  animation: wordmark-converge 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Mobile layout (under 640px): A designed stacked block, CRORE over STARS */
+.wordmark-mobile {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+.wordmark-mobile-line {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: clamp(4.5rem, 23vw, 8.5rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--color-white);
+  letter-spacing: 0.04em;
+  /* Load animation for mobile */
+  animation: wordmark-converge-mobile 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (max-width: 639px) {
+  .wordmark-desktop {
+    display: none;
+  }
+  .wordmark-mobile {
+    display: flex;
+  }
+}
+
+/* Pure CSS Letter-Spacing Convergence Animation */
+@keyframes wordmark-converge {
+  from {
+    letter-spacing: 0.32em;
+    opacity: 0.85;
+  }
+  to {
+    letter-spacing: 0.02em;
+    opacity: 1;
+  }
+}
+
+@keyframes wordmark-converge-mobile {
+  from {
+    letter-spacing: 0.24em;
+    opacity: 0.85;
+  }
+  to {
+    letter-spacing: 0.04em;
+    opacity: 1;
+  }
+}
+
+/* Respect prefers-reduced-motion: animation disabled */
+@media (prefers-reduced-motion: reduce) {
+  .wordmark-desktop,
+  .wordmark-mobile-line {
+    animation: none !important;
+    letter-spacing: 0.02em !important;
+  }
+}
+
+/* ==========================================================================
+   Section Specific Layouts & Typographic Scale
+   ========================================================================== */
+
+/* Hero */
+.hero-headline {
+  font-size: var(--text-h2);
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+
+.hero-support {
+  font-size: var(--text-lead);
+  line-height: 1.55;
+  color: var(--color-graphite-light);
+  max-width: 58ch;
+}
+
+/* Origin Section (White) */
+.numeral-display {
+  font-family: var(--font-display);
+  font-size: var(--text-numeral);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--color-black);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.telugu-entry {
+  font-size: var(--text-lead);
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.origin-body {
+  font-size: var(--text-lead);
+  line-height: 1.6;
+  color: var(--color-graphite);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* Philosophy Section (Charcoal) */
+.philosophy-statement {
+  font-size: var(--text-h1);
+  color: var(--color-white);
+  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.philosophy-body {
+  font-size: var(--text-lead);
+  line-height: 1.6;
+  color: var(--color-graphite-light);
+}
+
+/* Ambition Section (White) */
+.ambition-body {
+  font-size: var(--text-lead);
+  line-height: 1.6;
+  color: var(--color-graphite);
+}
+
+/* Journey Section (Black) */
+.journey-body {
+  font-size: var(--text-lead);
+  line-height: 1.6;
+  color: var(--color-graphite-light);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+/* ==========================================================================
+   Contact Form & Controls
+   ========================================================================== */
+.contact-wrap {
+  padding-top: clamp(3rem, 5vw, 5rem);
+}
+
+.contact-heading {
+  font-size: var(--text-h2);
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
+}
+
+.contact-copy {
+  font-size: var(--text-lead);
+  color: var(--color-graphite-light);
+  margin-bottom: 2.5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 48ch;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--border-dark);
+  color: var(--color-white);
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  border-radius: 0;
+  transition: border-color 0.15s ease;
+  min-height: 48px; /* Accessible 44px+ touch target */
+}
+
+.form-input:hover,
+.form-textarea:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.form-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Submit button */
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-height: 48px;
+  padding: 0.875rem 2.25rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-submit:hover {
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Fallback mailto link */
+.mailto-fallback {
+  margin-top: 2rem;
+  font-size: var(--text-sm);
+  color: var(--color-graphite-light);
+}
+
+.mailto-fallback a {
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mailto-fallback a:hover {
+  color: var(--color-graphite-light);
+}
+
+/* Form feedback alerts */
+.form-status {
+  padding: 1rem 1.25rem;
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.form-status-success {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+}
+
+.form-status-error {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #FFC0B8;
+}
+
+/* Honeypot field (hidden visually and from screen readers) */
+.visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -69,5 +499,77 @@ button {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-  border-width: 0;
+  border: 0;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background-color: var(--color-black);
+  border-top: 1px solid var(--border-dark);
+  padding-top: 3rem;
+  padding-bottom: 3.5rem;
+  font-size: var(--text-sm);
+  color: var(--color-graphite-light);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .footer-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer-link {
+  color: var(--color-graphite-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   Privacy Page Styles
+   ========================================================================== */
+.privacy-page {
+  padding-top: clamp(4rem, 6vw, 7rem);
+  padding-bottom: clamp(4rem, 6vw, 7rem);
+}
+
+.privacy-title {
+  font-size: var(--text-h1);
+  color: var(--color-white);
+  margin-bottom: 2.5rem;
+}
+
+.privacy-content {
+  font-size: var(--text-lead);
+  line-height: 1.7;
+  color: var(--color-graphite-light);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 62ch;
+}
+
+.privacy-content p strong {
+  color: var(--color-white);
 }

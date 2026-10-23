@@ -1,70 +1,67 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, Newsreader, Noto_Sans_Telugu } from "next/font/google";
 import "./globals.css";
-import { siteConfig } from "@/lib/config";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
-const inter = Inter({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-archivo",
   display: "swap",
+  axes: ["wdth"],
 });
 
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  display: "swap",
+  style: ["normal", "italic"],
+});
+
+const notoSansTelugu = Noto_Sans_Telugu({
+  subsets: ["telugu"],
+  variable: "--font-noto-telugu",
+  display: "swap",
+  weight: ["400", "600", "700"],
+});
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://crorestars.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} | ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
+    default: "CRORESTARS",
+    template: "%s | CRORESTARS",
   },
-  description: siteConfig.description,
-  keywords: [
-    "CRORESTARS",
-    "corporate group",
-    "diversified business",
-    "ventures",
-    "brand",
-    "corporate brand",
-  ],
-  authors: [{ name: siteConfig.name }],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
+  description:
+    "CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.",
+  alternates: {
+    canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
-    description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.og.image,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.name} — ${siteConfig.tagline}`,
-      },
-    ],
+    url: siteUrl,
+    siteName: "CRORESTARS",
+    title: "CRORESTARS",
+    description:
+      "CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
-    description: siteConfig.description,
-    images: [siteConfig.og.image],
+    title: "CRORESTARS",
+    description:
+      "CRORESTARS is a company in its earliest days, being built to create businesses across industries over time.",
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-touch-icon.png",
+    icon: "/icon.svg",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#171614",
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
 };
@@ -74,12 +71,34 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Truthful JSON-LD Organization containing only name, url, and founder name
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "CRORESTARS",
+    url: siteUrl,
+    founder: {
+      "@type": "Person",
+      name: "[FOUNDER NAME]", // TODO: Replace with founder name
+    },
+  };
+
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-[#171614]">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html
+      lang="en"
+      className={`${archivo.variable} ${newsreader.variable} ${notoSansTelugu.variable}`}
+    >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+      </head>
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        {children}
       </body>
     </html>
   );

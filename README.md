@@ -1,119 +1,62 @@
-# CRORESTARS — Official Corporate Website
+# CRORESTARS — Corporate Website
 
-> **"Many Possibilities. One Vision."**
+> **"A crore of stars. One direction."**
 
-Official corporate platform for **CRORESTARS**, an evolving diversified business group founded on disciplined growth, long-term thinking, and strategic convergence.
-
----
-
-## 1. Brand Background & Philosophy
-
-- **Origin:** Inspired by the Telugu surname *Kotichukkala*:
-  - **Koti (కోటి):** Crore, representing scale, depth, and abundance.
-  - **Chukkala (చుక్కలు):** Stars, representing countless individual lights and possibilities.
-- **Core Philosophy:** *Many becoming one* — bringing independent ideas and future ventures together under a single, disciplined corporate vision.
-- **Ambition:** To build an enduring group of businesses that creates value across industries and generations over time.
+The official corporate web presence for **CRORESTARS**, an early-stage company founded by [FOUNDER NAME] to create and operate businesses across industries over generations.
 
 ---
 
-## 2. Tech Stack
+## 1. Stack & Architecture
 
 - **Framework:** [Next.js 16](https://nextjs.org/) (App Router, Turbopack)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS v4 with custom brand tokens:
-  - Charcoal: `#171614`
-  - Warm Amber: `#E5932B`
-  - Soft Warm Grey: `#F3F1EC`
-  - White: `#FFFFFF`
-- **Typography:** Inter (Modern geometric sans-serif with tabular numerals and clean kerning)
-- **Icons:** [lucide-react](https://lucide.dev/) (used sparingly for subtle micro-interactions)
-- **Deployment Target:** [Vercel](https://vercel.com/)
+- **Styling:** Plain CSS with CSS Custom Properties (`app/globals.css`). Zero CSS frameworks, zero UI component libraries.
+- **Fonts:** Self-hosted via `next/font/google`:
+  - **Display:** *Archivo* (heavy width axis used for headlines and wordmark)
+  - **Reading:** *Newsreader* (serif with 62-character maximum line measure)
+  - **Telugu:** *Noto Sans Telugu* (for heritage etymology terms)
+- **Forms & Email:** `nodemailer` with Hostinger SMTP SSL (`smtp.hostinger.com:465`).
+- **Dependencies:** Only `next`, `react`, `react-dom`, `nodemailer`.
 
 ---
 
-## 3. Project Structure
+## 2. Placeholders Requiring Real Information
 
-```
-web/
-├── app/
-│   ├── layout.tsx         # Root layout with SEO metadata, header & footer
-│   ├── page.tsx           # Homepage (Hero, Brand Intro, Philosophy, Journey, Contact)
-│   ├── about/page.tsx     # About page (Heritage, Etymology, Vision, Mission, Principles)
-│   ├── ventures/page.tsx  # Ventures page (Portfolio framework & empty state)
-│   ├── contact/page.tsx   # Contact page (Official form, details & standards)
-│   ├── not-found.tsx      # Custom 404 page
-│   ├── sitemap.ts         # Automated sitemap generator
-│   ├── robots.ts          # Search engine crawler directives
-│   └── api/
-│       └── contact/route.ts # Server-side contact validation and processing
-├── components/
-│   ├── brand/
-│   │   └── Logo.tsx       # Reusable CRORESTARS wordmark with custom A star spark
-│   ├── layout/
-│   │   ├── Header.tsx     # Navigation header with responsive mobile drawer
-│   │   └── Footer.tsx     # Clean corporate footer with dynamic copyright
-│   └── contact/
-│       └── ContactForm.tsx # Accessible form with validation & anti-spam honeypot
-├── lib/
-│   └── config.ts          # Central brand configuration & future ventures data
-└── public/
-    ├── icon.svg           # CRORESTARS emblem favicon
-    ├── og-image.svg       # Social media sharing preview card
-    └── logo/
-        └── crorestars-wordmark.svg # Scalable vector wordmark
-```
+Before public launch, replace the following placeholders:
+
+| Placeholder | File | Description |
+| :--- | :--- | :--- |
+| `[FOUNDER NAME]` | `app/layout.tsx` | Used in the JSON-LD `Organization` schema `founder.name`. |
+| `[REGISTERED BUSINESS NAME, CITY, COUNTRY]` | `app/page.tsx`, `app/privacy/page.tsx` | Footer legal identity string (e.g. `CRORESTARS Pvt. Ltd., Hyderabad, India`). |
+| `hello@crorestars.com` | `app/page.tsx`, `components/ContactForm.tsx`, `.env.example` | The visible public email address. |
+| `SMTP_USER`, `SMTP_PASS`, `CONTACT_TO` | `.env.local` / Vercel Environment Variables | Hostinger SMTP credentials for the contact form. |
 
 ---
 
-## 4. Single Configuration File (`lib/config.ts`)
-
-All brand parameters are consolidated in [`lib/config.ts`](./lib/config.ts). You can update them at any time without editing any component or page:
-
-- **Brand Details:** Name, tagline, official website URL.
-- **Contact Details:** Email, phone, office address.
-- **Social Links:** LinkedIn, X (Twitter), etc.
-- **Future Ventures:** An easily editable array to add business divisions as they are formed.
-
-### How to Add a Future Venture
-When a new division or subsidiary is ready to be announced, simply add an entry to the `ventures` array in `lib/config.ts`:
-
-```typescript
-export const ventures = [
-  {
-    id: "crorestars-capital",
-    name: "Crorestars Capital",
-    shortDescription: "Strategic capital allocation and venture investments.",
-    status: "developing",
-    sector: "Financial Services",
-    href: "/ventures/capital",
-  },
-];
-```
-The Ventures page automatically transitions from the empty-state layout to displaying the portfolio cards.
-
----
-
-## 5. Local Development Setup
+## 3. How to Run Locally
 
 ### Prerequisites
-- Node.js 18.18+ or 20+ (tested with Node v24)
+- Node.js 18.18+ or 20+ (tested with Node 24)
 - npm 9+ or 10+
 
-### Installation & Run
+### Setup
 ```bash
-# Navigate to the web folder
+# Navigate to the web project
 cd web
 
-# Install dependencies
+# Copy environment variables
+cp .env.example .env.local
+
+# Install minimal dependencies
 npm install
 
-# Start development server
+# Start local development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Production Build
+### Local Production Build & Test
 ```bash
 npm run build
 npm start
@@ -121,48 +64,57 @@ npm start
 
 ---
 
-## 6. Contact Form & Email Integration
+## 4. How to Deploy to Vercel
 
-The contact form is configured with:
-1. **Client-side & Server-side validation:** Verifies name, email formatting, and message body.
-2. **Anti-Spam Honeypot:** Discards automated bot submissions without interrupting legitimate users.
-3. **Graceful Fallback:** If an email delivery service (like Resend) is not yet wired, the server logs the enquiry securely and displays an honest direct email link (`hello@crorestars.com`).
-
-### Optional: Connecting Resend for Instant Email Forwarding
-1. Sign up for a free key at [resend.com](https://resend.com).
-2. Create `.env.local` in the `web` folder:
-   ```env
-   RESEND_API_KEY=re_your_api_key_here
-   CONTACT_RECIPIENT_EMAIL=your-personal-inbox@example.com
+1. **Push to GitHub**:
+   Ensure your code is pushed to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "feat: complete CRORESTARS corporate site"
+   git push origin main
    ```
-3. Install Resend: `npm install resend` and uncomment the email sending block in `app/api/contact/route.ts`.
+2. **Import in Vercel**:
+   - Go to [vercel.com/new](https://vercel.com/new).
+   - Select your repository (`cc`).
+   - Leave the root directory as default (or `web` if importing the parent repository).
+   - Framework preset will automatically detect **Next.js**.
+3. **Deploy**:
+   - Click **Deploy**. Your site will be live on an official Vercel preview domain in under 45 seconds.
 
 ---
 
-## 7. Deploying to Vercel
+## 5. How to Set Environment Variables on Vercel
 
-### Option A: Import via GitHub / GitLab / Bitbucket
-1. Push your repository to GitHub.
-2. Go to [vercel.com/new](https://vercel.com/new) and import the repository.
-3. In the **Root Directory** field, set `web` (if the Next.js app is inside the `web` subfolder).
-4. Click **Deploy**. Vercel will automatically build and assign a production URL (e.g., `crorestars.vercel.app`).
-
-### Option B: Deploy via Vercel CLI
-```bash
-npm install -g vercel
-cd web
-vercel
-```
+In your Vercel Project Dashboard:
+1. Navigate to **Settings** &rarr; **Environment Variables**.
+2. Add the following keys:
+   - `NEXT_PUBLIC_SITE_URL`: `https://crorestars.com`
+   - `NEXT_PUBLIC_CONTACT_EMAIL`: `hello@crorestars.com`
+   - `SMTP_USER`: `your-mailbox@crorestars.com`
+   - `SMTP_PASS`: `your-hostinger-password`
+   - `CONTACT_TO`: `founder@crorestars.com`
+3. Trigger a redeployment to apply variables.
 
 ---
 
-## 8. Connecting Your Custom Domain
+## 6. How to Connect Your Custom Domain
 
-Once deployed to Vercel:
-1. Go to your Project Settings on Vercel &rarr; **Domains**.
-2. Add your domain: `crorestars.com` and `www.crorestars.com`.
-3. In your domain registrar (GoDaddy, Namecheap, Cloudflare, Google Domains):
+1. In Vercel, go to **Settings** &rarr; **Domains**.
+2. Enter your custom domain: `crorestars.com` and `www.crorestars.com`.
+3. In your domain registrar (Hostinger, Namecheap, GoDaddy, Cloudflare):
    - For `www`: Add a `CNAME` record pointing to `cname.vercel-dns.com`.
-   - For apex (`crorestars.com`): Add an `A` record pointing to `76.76.21.21` (or follow Vercel's nameserver recommendations).
-4. Vercel automatically provisions free SSL/TLS certificates.
-5. In `lib/config.ts`, ensure `url: "https://www.crorestars.com"` is set.
+   - For root (`@`): Add an `A` record pointing to `76.76.21.21` (or follow Vercel's nameserver instructions).
+4. Vercel will automatically issue and renew a free SSL/TLS certificate.
+
+---
+
+## 7. How to Replace the Wordmark with a Final Logo
+
+The wordmark is isolated inside a single dedicated component:
+[`components/Wordmark.tsx`](./components/Wordmark.tsx)
+
+When your final custom SVG logo is ready:
+1. Place your SVG file in `public/logo.svg`.
+2. Open [`components/Wordmark.tsx`](./components/Wordmark.tsx).
+3. Replace the text span with your `<img src="/logo.svg" alt="CRORESTARS" ... />` or inline `<svg>`.
+4. No other page or component on the website needs to be edited.
