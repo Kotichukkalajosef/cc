@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "@/components/brand/Logo";
+import StarSymbol from "@/components/brand/StarSymbol";
 import { siteConfig } from "@/lib/config";
 
 const navLinks = [
@@ -102,10 +103,10 @@ export default function Footer() {
           <p className="text-xs text-white/35">
             &copy; {copyrightRange} {footer.legalName}. All rights reserved.
           </p>
-          <div className="flex items-center gap-1">
-            {/* Amber spark accent */}
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E5932B] inline-block" aria-hidden="true" />
-            <span className="text-xs text-white/25">CRORESTARS</span>
+          <div className="flex items-center gap-1.5">
+            {/* Amber Star accent */}
+            <StarSymbol size={13} color="#E5932B" />
+            <span className="text-xs font-semibold tracking-wider text-white/30">CRORESTARS</span>
           </div>
         </div>
       </div>

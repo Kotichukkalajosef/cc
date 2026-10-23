@@ -1,24 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 56" fill="none" role="img" aria-label="CRORESTARS">
-  <!-- CRORESTARS wordmark with custom A containing amber star -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 48" fill="none" role="img" aria-label="CRORESTARS">
+  <!-- Unified typographic text with uniform kerning -->
   <text
     x="0"
-    y="44"
-    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font-size="40"
-    font-weight="700"
-    letter-spacing="6"
+    y="36"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font-size="36"
+    font-weight="900"
+    letter-spacing="5"
     fill="#171614"
-  >CROREST</text>
-  <!-- Custom A with amber star/spark inside -->
-  <text
-    x="218"
-    y="44"
-    font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font-size="40"
-    font-weight="700"
-    letter-spacing="6"
-    fill="#171614"
-  >ARS</text>
-  <!-- Amber spark/dot inside the A crossbar area -->
-  <circle cx="230" cy="27" r="3.5" fill="#E5932B"/>
+  >CRORESTARS</text>
+
+  <!-- 4-point star spark perfectly positioned inside the counter of the A -->
+  <!-- Center of A in CRORESTARS with font-size 36 & letter-spacing 5 is at x ~ 243, y ~ 21 -->
+  <path
+    d="M243 16 C243 19 240 21 237 21 C240 21 243 23 243 26 C243 23 246 21 249 21 C246 21 243 19 243 16 Z"
+    fill="#E5932B"
+  />
 </svg>

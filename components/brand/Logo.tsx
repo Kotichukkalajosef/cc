@@ -1,59 +1,58 @@
-/**
- * Logo component — CRORESTARS wordmark.
- *
- * To swap the logo asset, update the `logo.src` path in lib/config.ts.
- * No other files need to change.
- */
-
 import Link from "next/link";
 import { siteConfig } from "@/lib/config";
+import StarSymbol from "./StarSymbol";
 
 interface LogoProps {
   /** White variant for dark backgrounds */
   inverted?: boolean;
-  /** Additional CSS classes */
+  /** Additional CSS classes for size and typography */
   className?: string;
-  /** Skip the link wrapper (e.g. when already on the home page hero) */
+  /** Skip the link wrapper */
   noLink?: boolean;
+  /** Custom size scale: "sm" | "md" | "lg" */
+  size?: "sm" | "md" | "lg";
 }
 
-export default function Logo({ inverted = false, className = "", noLink = false }: LogoProps) {
+/**
+ * Official CRORESTARS Wordmark
+ *
+ * Designed with geometric precision:
+ * - Pure uppercase lettering with uniform kerning (no split text gaps).
+ * - Custom "A" featuring the signature 4-point amber star/spark in its counter.
+ */
+export default function Logo({
+  inverted = false,
+  className = "",
+  noLink = false,
+  size = "md",
+}: LogoProps) {
+  const sizeClasses = {
+    sm: "text-lg tracking-[0.16em]",
+    md: "text-xl sm:text-2xl tracking-[0.18em]",
+    lg: "text-3xl sm:text-4xl lg:text-5xl tracking-[0.18em]",
+  }[size];
+
+  const textColor = inverted ? "text-white" : "text-[#171614]";
+
   const wordmark = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 340 52"
-      fill="none"
-      role="img"
+    <span
+      className={`inline-flex items-baseline font-black uppercase select-none leading-none ${sizeClasses} ${textColor} ${className}`}
       aria-label={siteConfig.name}
-      className={`h-8 w-auto ${className}`}
     >
-      {/* Main wordmark letters — colour adapts to inverted prop */}
-      <text
-        x="0"
-        y="40"
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        fontSize="36"
-        fontWeight="800"
-        letterSpacing="5"
-        fill={inverted ? "#FFFFFF" : "#171614"}
-      >
-        CROREST
-      </text>
-      {/* A with amber spark */}
-      <text
-        x="220"
-        y="40"
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        fontSize="36"
-        fontWeight="800"
-        letterSpacing="5"
-        fill={inverted ? "#FFFFFF" : "#171614"}
-      >
-        ARS
-      </text>
-      {/* Amber spark/dot — the signature detail inside the A */}
-      <circle cx="232" cy="24" r="3.5" fill="#E5932B" />
-    </svg>
+      <span>CROREST</span>
+      {/* Custom A with embedded 4-point amber star/spark */}
+      <span className="relative inline-flex items-center justify-center mx-[0.02em] self-baseline">
+        <span>A</span>
+        {/* Amber Star embedded in the upper counter of A */}
+        <span
+          className="absolute top-[24%] left-1/2 -translate-x-1/2 pointer-events-none flex items-center justify-center"
+          aria-hidden="true"
+        >
+          <StarSymbol className="w-[0.38em] h-[0.38em]" color="#E5932B" />
+        </span>
+      </span>
+      <span>RS</span>
+    </span>
   );
 
   if (noLink) return wordmark;
@@ -61,8 +60,8 @@ export default function Logo({ inverted = false, className = "", noLink = false 
   return (
     <Link
       href="/"
-      aria-label={`${siteConfig.name} — Back to home`}
-      className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E5932B] rounded-sm"
+      aria-label={`${siteConfig.name} — Home`}
+      className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E5932B] rounded-sm py-1"
     >
       {wordmark}
     </Link>

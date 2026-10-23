@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Layers, Search, Sparkles, Building2 } from "lucide-react";
+import { ArrowRight, Layers, Search, Building2 } from "lucide-react";
+import StarSymbol from "@/components/brand/StarSymbol";
 import { ventures } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -100,16 +101,16 @@ export default function VenturesPage() {
           ) : (
             <div className="border border-dashed border-[#171614]/20 rounded-sm p-12 lg:p-20 text-center bg-[#F3F1EC]/40 max-w-4xl mx-auto">
               <div className="w-14 h-14 rounded-full bg-[#171614] text-[#E5932B] flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-6 h-6" />
+                <StarSymbol size={26} color="#E5932B" />
               </div>
               <h3 className="text-2xl font-bold text-[#171614] mb-3">
                 Portfolio in Formation
               </h3>
               <p className="text-base text-[#171614]/75 max-w-xl mx-auto leading-relaxed mb-8">
-                New ventures will be introduced here as CRORESTARS develops its business portfolio.
+                New ventures will be introduced here as CRORESTARS develops its business portfolio. Every venture begins as an independent star that aligns with our shared vision.
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#171614]/10 rounded-sm text-xs text-[#171614]/65">
-                <span className="w-2 h-2 rounded-full bg-[#E5932B]" aria-hidden="true" />
+                <StarSymbol size={11} color="#E5932B" />
                 Venture criteria and roadmap currently in research
               </div>
             </div>
