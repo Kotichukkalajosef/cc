@@ -83,18 +83,20 @@ export default function HomePage() {
 
         <div className="section-transition-glow" aria-hidden="true" />
 
-        {/* 3. Philosophy Section (Deep Charcoal with Ambient Amber Light) */}
+        {/* 3. Philosophy Section (Deep Space Horizon) */}
         <section className="section-3d section-philosophy" aria-labelledby="philosophy-title">
           <div className="container">
-            <div className="grid-12">
-              <div style={{ gridColumn: "span 12" }}>
-                <h2 id="philosophy-title" className="philosophy-statement">
-                  Many possibilities. One vision.
-                </h2>
-                <div className="reading-measure">
-                  <p className="philosophy-body">
-                    One idea is small. So is one person, one team, one company. Brought together under a clear direction, they can become something none of them could be alone. That is how a star forms, and it is how we intend to build.
-                  </p>
+            <div className="cosmic-panel">
+              <div className="grid-12">
+                <div style={{ gridColumn: "span 12" }}>
+                  <h2 id="philosophy-title" className="philosophy-statement">
+                    Many possibilities. One vision.
+                  </h2>
+                  <div className="reading-measure">
+                    <p className="philosophy-body">
+                      One idea is small. So is one person, one team, one company. Brought together under a clear direction, they can become something none of them could be alone. That is how a star forms, and it is how we intend to build.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,18 +105,20 @@ export default function HomePage() {
 
         <div className="section-transition-glow" aria-hidden="true" />
 
-        {/* 4. Ambition Section (Glass-Bordered Horizon) */}
+        {/* 4. Ambition Section (Horizon Flight) */}
         <section className="section-3d section-ambition" aria-labelledby="ambition-title">
           <div className="container">
-            <div className="grid-12">
-              <div style={{ gridColumn: "span 12" }}>
-                <h2 id="ambition-title" className="visually-hidden">
-                  Our ambition
-                </h2>
-                <div className="reading-measure">
-                  <p className="ambition-body">
-                    Over time, we intend to build meaningful businesses across industries, wherever there is a genuine opportunity to create value. We have not chosen the first one yet, and we will not pretend otherwise.
-                  </p>
+            <div className="cosmic-panel">
+              <div className="grid-12">
+                <div style={{ gridColumn: "span 12" }}>
+                  <h2 id="ambition-title" className="visually-hidden">
+                    Our ambition
+                  </h2>
+                  <div className="reading-measure">
+                    <p className="ambition-body">
+                      Over time, we intend to build meaningful businesses across industries, wherever there is a genuine opportunity to create value. We have not chosen the first one yet, and we will not pretend otherwise.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
