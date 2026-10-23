@@ -40,9 +40,8 @@ export default function Navbar() {
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`} role="banner">
       <div className="container site-header-inner">
-        {/* Brand Logo */}
+        {/* Brand Logo (Clean wordmark without prefix dot) */}
         <Link href="/" className="brand-mark" aria-label="CRORESTARS — Home">
-          <span className="brand-dot" aria-hidden="true" />
           <span className="brand-text">CRORESTARS</span>
         </Link>
 

@@ -491,122 +491,168 @@ h1, h2, h3, h4, .display-font {
 }
 
 /* ==============================================================================
-   Wordmark: Big Bang Collision & Fusion Animation
-   "CRORE" and "STARS" rush in at high speed, collide with a Big Bang burst,
-   and fuse together into one seamless wordmark: "CRORESTARS".
+   Wordmark: Big Bang Collision & Traveling Orange Starlight Border
+   - Desktop: Full-width horizontal wordmark with collision and starlight beam.
+   - Mobile: Monumental stacked block (CRORE / STARS) looking massive and clean.
+   - Letters: Crisp white fill with an orange starlight border traveling letter to letter.
    ============================================================================== */
 .wordmark-container {
   width: 100%;
   max-width: 100%;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
   position: relative;
   user-select: none;
   cursor: pointer;
+}
+
+/* Desktop View (>= 640px) */
+.wordmark-desktop-view {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.desktop-track {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+}
+
+.desktop-track .word-part {
+  flex: 1;
+  min-width: 0;
+}
+
+.word-svg-half {
+  width: 100%;
+  height: auto;
+  display: block;
   overflow: visible;
 }
 
-.wordmark-stage {
+/* Mobile View (< 640px) — Huge Stacked Block */
+.wordmark-mobile-view {
+  display: none;
+  width: 100%;
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 100%;
 }
 
-.wordmark-track {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  z-index: 2;
+.wordmark-mobile-stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.15rem;
+}
+
+.mobile-word-row {
+  width: 100%;
+}
+
+.word-svg-mobile {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+@media (max-width: 639px) {
+  .wordmark-desktop-view {
+    display: none !important;
+  }
+  .wordmark-mobile-view {
+    display: block !important;
+  }
+}
+
+/* SVG Text Styles: Crisp White Fill & Moving Orange Starlight Border */
+.svg-fill-text {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 9.5vw, 8.25rem);
   font-weight: 900;
-  letter-spacing: clamp(0.04em, 0.8vw, 0.1em);
+  font-size: 108px;
+  letter-spacing: 12px;
+  fill: #FFFFFF;
   text-transform: uppercase;
-  color: #FFFFFF;
-  text-shadow: 0 4px 30px rgba(242, 163, 58, 0.45);
-  line-height: 1;
-  max-width: 100%;
 }
 
-/* The Left Half: CRORE */
-.word-part.word-crore {
-  display: inline-block;
-  transform-origin: right center;
-  will-change: transform, opacity, filter;
-  animation: collide-crore 0.68s cubic-bezier(0.12, 0.85, 0.28, 1) forwards;
+.svg-stroke-text {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 108px;
+  letter-spacing: 12px;
+  fill: none;
+  stroke-width: 2.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(255, 107, 0, 0.75));
+  text-transform: uppercase;
 }
 
-/* The Right Half: STARS */
-.word-part.word-stars {
-  display: inline-block;
-  transform-origin: left center;
-  will-change: transform, opacity, filter;
-  animation: collide-stars 0.68s cubic-bezier(0.12, 0.85, 0.28, 1) forwards;
+.svg-fill-text-mobile {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 106px;
+  letter-spacing: 10px;
+  fill: #FFFFFF;
+  text-transform: uppercase;
 }
 
-/* Inward rushing animations */
-@keyframes collide-crore {
+.svg-stroke-text-mobile {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 106px;
+  letter-spacing: 10px;
+  fill: none;
+  stroke-width: 2.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(255, 107, 0, 0.75));
+  text-transform: uppercase;
+}
+
+/* Inward Rushing Collision Animation */
+.word-crore,
+.row-crore {
+  animation: collide-from-left 0.65s cubic-bezier(0.12, 0.85, 0.28, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.word-stars,
+.row-stars {
+  animation: collide-from-right 0.65s cubic-bezier(0.12, 0.85, 0.28, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes collide-from-left {
   0% {
-    transform: translate3d(-35vw, 0, 0) scale(1.1);
+    transform: translate3d(-35vw, 0, 0);
     opacity: 0;
-    filter: blur(8px);
-    color: #F2A33A;
   }
-  30% {
-    opacity: 0.9;
-    filter: blur(4px);
-  }
-  85% {
-    filter: blur(1px);
+  25% {
+    opacity: 0.85;
   }
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
-    filter: blur(0);
-    color: var(--color-white);
   }
 }
 
-@keyframes collide-stars {
+@keyframes collide-from-right {
   0% {
-    transform: translate3d(35vw, 0, 0) scale(1.1);
+    transform: translate3d(35vw, 0, 0);
     opacity: 0;
-    filter: blur(8px);
-    color: #F2A33A;
   }
-  30% {
-    opacity: 0.9;
-    filter: blur(4px);
-  }
-  85% {
-    filter: blur(1px);
+  25% {
+    opacity: 0.85;
   }
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
-    filter: blur(0);
-    color: var(--color-white);
   }
 }
 
-/* The Impact Vibration */
-.wordmark-container.is-banging .wordmark-track {
-  animation: impact-shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
-}
-
-@keyframes impact-shake {
-  0% { transform: scale(1); }
-  20% { transform: scale(1.03) translate(-2px, 1px); }
-  40% { transform: scale(1.02) translate(2px, -1px); }
-  60% { transform: scale(1.01) translate(-1px, 0); }
-  80% { transform: scale(1.005) translate(1px, 0); }
-  100% { transform: scale(1) translate(0, 0); }
-}
-
-/* ==============================================================================
-   Big Bang Flash & Shockwave at the seam of impact
-   ============================================================================== */
+/* Big Bang Shockwave Burst at the seam */
 .big-bang-anchor {
   position: absolute;
   left: 50%;
@@ -615,20 +661,19 @@ h1, h2, h3, h4, .display-font {
   width: 1px;
   height: 1px;
   pointer-events: none;
-  z-index: 3;
+  z-index: 5;
 }
 
-/* Central Radiant Energy Flash */
 .big-bang-flash {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 320px;
-  height: 320px;
-  margin-top: -160px;
-  margin-left: -160px;
+  width: 260px;
+  height: 260px;
+  margin-top: -130px;
+  margin-left: -130px;
   border-radius: 50%;
-  background: radial-gradient(circle, #FFFFFF 0%, #FFF2D6 20%, #F2A33A 50%, rgba(242, 163, 58, 0) 70%);
+  background: radial-gradient(circle, #FFFFFF 0%, #FFF2D6 25%, #F2A33A 55%, rgba(242, 163, 58, 0) 70%);
   transform: scale(0);
   opacity: 0;
   pointer-events: none;
@@ -639,34 +684,20 @@ h1, h2, h3, h4, .display-font {
 }
 
 @keyframes flash-burst {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  15% {
-    transform: scale(1.4);
-    opacity: 1;
-    filter: drop-shadow(0 0 35px #F2A33A);
-  }
-  50% {
-    transform: scale(2.2);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(3.2);
-    opacity: 0;
-  }
+  0% { transform: scale(0); opacity: 0; }
+  20% { transform: scale(1.3); opacity: 1; }
+  60% { transform: scale(2.2); opacity: 0.5; }
+  100% { transform: scale(3.2); opacity: 0; }
 }
 
-/* Expanding Circular Shockwaves */
 .big-bang-shockwave {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 200px;
-  height: 200px;
-  margin-top: -100px;
-  margin-left: -100px;
+  width: 180px;
+  height: 180px;
+  margin-top: -90px;
+  margin-left: -90px;
   border-radius: 50%;
   border: 2px solid #FFFFFF;
   transform: scale(0);
@@ -683,31 +714,19 @@ h1, h2, h3, h4, .display-font {
 }
 
 @keyframes shockwave-expand {
-  0% {
-    transform: scale(0.1);
-    opacity: 1;
-    border-width: 3px;
-  }
-  50% {
-    opacity: 0.6;
-    border-width: 1.5px;
-  }
-  100% {
-    transform: scale(2.8);
-    opacity: 0;
-    border-width: 0.5px;
-  }
+  0% { transform: scale(0.1); opacity: 1; border-width: 3px; }
+  50% { opacity: 0.6; border-width: 1.5px; }
+  100% { transform: scale(2.8); opacity: 0; border-width: 0.5px; }
 }
 
-/* Horizontal & Diagonal Light Flares */
 .big-bang-flare {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 380px;
+  width: 360px;
   height: 2px;
   margin-top: -1px;
-  margin-left: -190px;
+  margin-left: -180px;
   background: linear-gradient(90deg, transparent, #FFFFFF 50%, transparent);
   transform: scaleX(0);
   opacity: 0;
@@ -718,46 +737,23 @@ h1, h2, h3, h4, .display-font {
 }
 
 @keyframes flare-burst {
-  0% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-  30% {
-    transform: scaleX(1.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(3.5);
-    opacity: 0;
-  }
-}
-
-/* Post-Fusion Shimmer on the Unified Wordmark */
-.wordmark-container.is-fused .wordmark-track {
-  animation: wordmark-glow 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes wordmark-glow {
-  0% {
-    filter: drop-shadow(0 0 0 rgba(242, 163, 58, 0));
-  }
-  100% {
-    filter: drop-shadow(0 0 16px rgba(242, 163, 58, 0.22));
-  }
+  0% { transform: scaleX(0); opacity: 0; }
+  30% { transform: scaleX(1.8); opacity: 1; }
+  100% { transform: scaleX(3.5); opacity: 0; }
 }
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .word-part.word-crore,
-  .word-part.word-stars,
+  .word-crore,
+  .word-stars,
+  .row-crore,
+  .row-stars,
   .big-bang-flash,
   .big-bang-shockwave,
-  .big-bang-flare,
-  .wordmark-track {
+  .big-bang-flare {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
-    filter: none !important;
   }
   .big-bang-anchor {
     display: none !important;
